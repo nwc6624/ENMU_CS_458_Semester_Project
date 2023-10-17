@@ -10,6 +10,8 @@
 
 #pip install chalice
 
+"release 1.d0"
+
 ################################################
 
 from flask import Flask, request, jsonify
