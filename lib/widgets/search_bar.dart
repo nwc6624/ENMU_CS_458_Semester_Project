@@ -12,7 +12,7 @@ class SearchTextField extends StatelessWidget {
       minLines: 1,
       maxLines: 3,
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.all(20),
+        contentPadding: const EdgeInsets.all(15),
         hintText: 'Search ENMU:',
         hintStyle: const TextStyle(fontSize: 18),
         border: OutlineInputBorder(

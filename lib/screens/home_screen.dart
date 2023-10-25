@@ -4,42 +4,8 @@ import '../widgets/emergency_card.dart';
 import '../widgets/saferide_card.dart';
 import '../widgets/search_bar.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int navBarIndex = 0;
-
-  final List<BottomNavigationBarItem> _navBarItems = [
-    const BottomNavigationBarItem(
-      icon: Icon(Icons.home),
-      label: 'Home',
-    ),
-    const BottomNavigationBarItem(
-      icon: Icon(Icons.map),
-      label: 'Map',
-    ),
-    const BottomNavigationBarItem(
-      icon: Icon(Icons.sports_baseball),
-      label: 'Sports',
-    ),
-    const BottomNavigationBarItem(
-      icon: Icon(Icons.store_mall_directory),
-      label: 'Directory',
-    ),
-  ];
-
-  void _navItemTapped(int index) {
-    setState(() {
-      navBarIndex = index;
-    });
-  }
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -48,17 +14,8 @@ class _MyHomePageState extends State<MyHomePage> {
         // Dismiss the keyboard when the user taps outside the TextField
         FocusScope.of(context).unfocus();
       },
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.primary,
-          title: Text(
-            widget.title,
-            style: const TextStyle(
-              color: Colors.white,
-            ),
-          ),
-        ),
-        body: const Padding(
+      child: const Scaffold(
+        body: Padding(
           padding: EdgeInsets.symmetric(
             vertical: 25,
             horizontal: 10,
@@ -88,13 +45,6 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ],
           ),
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          selectedItemColor: Theme.of(context).colorScheme.primary,
-          unselectedItemColor: Theme.of(context).colorScheme.secondary,
-          items: _navBarItems,
-          currentIndex: navBarIndex,
-          onTap: _navItemTapped,
         ),
       ),
     );
