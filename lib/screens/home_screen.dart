@@ -3,43 +3,15 @@ import 'package:flutter/material.dart';
 import '../widgets/emergency_card.dart';
 import '../widgets/saferide_card.dart';
 import '../widgets/search_bar.dart';
+import 'safe_ride_screen.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key});
 
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int navBarIndex = 0;
-
-  final List<BottomNavigationBarItem> _navBarItems = [
-    const BottomNavigationBarItem(
-      icon: Icon(Icons.home),
-      label: 'Home',
-    ),
-    const BottomNavigationBarItem(
-      icon: Icon(Icons.map),
-      label: 'Map',
-    ),
-    const BottomNavigationBarItem(
-      icon: Icon(Icons.sports_baseball),
-      label: 'Sports',
-    ),
-    const BottomNavigationBarItem(
-      icon: Icon(Icons.store_mall_directory),
-      label: 'Directory',
-    ),
-  ];
-
-  void _navItemTapped(int index) {
-    setState(() {
-      navBarIndex = index;
-    });
-  }
+  // void cardOnTap() {
+  //   Navigator.of(context)
+  //       .push(MaterialPageRoute(builder: (context) => const SafeRide()));
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -49,23 +21,14 @@ class _MyHomePageState extends State<MyHomePage> {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.primary,
-          title: Text(
-            widget.title,
-            style: const TextStyle(
-              color: Colors.white,
-            ),
-          ),
-        ),
-        body: const Padding(
-          padding: EdgeInsets.symmetric(
+        body: Padding(
+          padding: const EdgeInsets.symmetric(
             vertical: 25,
             horizontal: 10,
           ),
           child: Column(
             children: [
-              Padding(
+              const Padding(
                 padding: EdgeInsets.all(16),
                 child: SearchTextField(),
               ),
@@ -73,13 +36,19 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    SafeRideCard(
-                      title: 'SafeRide',
-                      date: 'Monday-Saturday',
-                      time: '6pm-3am',
+                    GestureDetector(
+                      child: const SafeRideCard(
+                        title: 'SafeRide',
+                        date: 'Monday-Saturday',
+                        time: '6pm-3am',
+                      ),
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const SafeRide()));
+                      },
                     ),
-                    SizedBox(height: 16),
-                    EmergencyCard(
+                    const SizedBox(height: 16),
+                    const EmergencyCard(
                       title: 'Emergency',
                       icon: Icons.local_police,
                     ),
@@ -88,13 +57,6 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ],
           ),
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          selectedItemColor: Theme.of(context).colorScheme.primary,
-          unselectedItemColor: Theme.of(context).colorScheme.secondary,
-          items: _navBarItems,
-          currentIndex: navBarIndex,
-          onTap: _navItemTapped,
         ),
       ),
     );
