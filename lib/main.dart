@@ -15,7 +15,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'ENMUmobile',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green.shade900),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.green.shade900,
+        ),
+        appBarTheme: const AppBarTheme().copyWith(
+          foregroundColor: Colors.white,
+          backgroundColor: Colors.green.shade900,
+          iconTheme: const IconThemeData(
+            color: Colors.white,
+          ),
+        ),
         useMaterial3: true,
       ),
       home: const NavBarHandler(),

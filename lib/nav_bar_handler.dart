@@ -53,11 +53,7 @@ class _NavBarHandlerState extends State<NavBarHandler> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.primary,
         title: const Text('ENMUmobile',
-          style: TextStyle(
-            color: Colors.white,
-          ),
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
