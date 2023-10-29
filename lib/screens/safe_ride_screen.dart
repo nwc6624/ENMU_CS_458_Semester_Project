@@ -50,7 +50,7 @@ class SafeRide extends StatelessWidget {
                     ),
                   ),
                   TextButton(
-                    onPressed: () => _makePhoneCall('575.607.5999'),
+                    onPressed: () => _makePhoneCall('5756075999'),
                     child: const Text(
                       '575.607.5999',
                       style: TextStyle(
@@ -64,7 +64,7 @@ class SafeRide extends StatelessWidget {
                 height: 16,
               ),
               const Text(
-                'ENMU Safe Ride is a free program designated for any and all current EMU students to be picked up and transported '
+                'ENMU Safe Ride is a free program designated for any and all current ENMU students to be picked up and transported '
                 'safely home anywhere within Portales city limits when in unsafe situations or unable to drive due to being under the '
                 'influence. The operating hours are Thursdays from 8 a.m. to Sunday at 12 a.m. The drivers are students and keep the '
                 'program private and confidential.',
