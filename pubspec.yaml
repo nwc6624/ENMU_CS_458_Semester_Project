@@ -10,6 +10,7 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.2
   url_launcher: ^6.2.1
+  image_gallery_saver: '^2.0.3'
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -17,4 +18,6 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-  - assets/images/safe-ride-logo.png
+    - assets/images/campus-map-whole.png
+    - assets/images/campus-map-northwest-us70.png
+    - assets/images/campus-map-southeast-of-us70.png
