@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.cgdev.enmu_mobile.app-mergeDebugResources-9:/values-night-v8/values-night-v8.xml",
+            "outputFile": "com.cgdev.enmu_mobile.app-mergeDebugResources-11:/values-night-v8/values-night-v8.xml",
             "map": [
                 {
                     "source": "/Users/jakegill/Development/AndroidStudioProjects/ENMU_CS_458_Semester_Project/android/app/src/main/res/values-night/styles.xml",
