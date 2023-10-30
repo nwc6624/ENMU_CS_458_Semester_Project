@@ -3,7 +3,6 @@
 .idea/
 .vscode/
 .packages
-.pubspec.lock
 
 # Ignore system and temporary files
 .DS_Store
