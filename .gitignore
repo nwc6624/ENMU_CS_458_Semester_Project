@@ -1,0 +1,20 @@
+# Ignore auto-generated files
+/.build/
+.idea/
+.vscode/
+.packages
+/.pubspec.lock
+
+# Ignore system and temporary files
+.DS_Store
+*.iml
+/.dart_tool/
+/.flutter-plugins
+/.metadata
+
+.atom/
+.idea
+.pub/
+ios/.generated/
+packages
+/.flutter-plugins-dependencies
