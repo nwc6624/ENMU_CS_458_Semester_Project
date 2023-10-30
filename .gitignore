@@ -3,18 +3,17 @@
 .idea/
 .vscode/
 .packages
-/.pubspec.lock
+.pubspec.lock
 
 # Ignore system and temporary files
 .DS_Store
 *.iml
 /.dart_tool/
-/.flutter-plugins
 /.metadata
 
 .atom/
 .idea
 .pub/
 ios/.generated/
-packages
-/.flutter-plugins-dependencies
+.flutter-plugins
+.flutter-plugins-dependencies
