@@ -4,13 +4,14 @@ import '../widgets/emergency_card.dart';
 import '../widgets/saferide_card.dart';
 import '../widgets/search_bar.dart';
 import 'safe_ride_screen.dart';
+import 'emergency_contact_screen.dart';
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
 
-  // void cardOnTap() {
+  // void cardOnTap(BuildContext context, newClass) {
   //   Navigator.of(context)
-  //       .push(MaterialPageRoute(builder: (context) => const SafeRide()));
+  //       .push(MaterialPageRoute(builder: (context) => newClass));
   // }
 
   @override
@@ -48,9 +49,15 @@ class MyHomePage extends StatelessWidget {
                       },
                     ),
                     const SizedBox(height: 16),
-                    const EmergencyCard(
-                      title: 'Emergency',
-                      icon: Icons.local_police,
+                    GestureDetector(
+                      child: const EmergencyCard(
+                        title: 'Emergency',
+                        icon: Icons.local_police,
+                      ),
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const EmergencyContact()));
+                      },
                     ),
                   ],
                 ),
