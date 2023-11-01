@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_pdfview/flutter_pdfview.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
-
-
-class MapImage extends StatelessWidget {
+class MapImage extends StatefulWidget {
   const MapImage({super.key, required this.pdfPath});
 
   final String pdfPath;
+
+  @override
+  State<MapImage> createState() => _MapImageState();
+}
+
+class _MapImageState extends State<MapImage> {
 
   @override
   Widget build(BuildContext context) {
@@ -15,41 +19,9 @@ class MapImage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('ENMUmobile'),
       ),
-      body: PDFView(
-        filePath: pdfPath,
-        enableSwipe: true,
-        swipeHorizontal: true,
-        autoSpacing: false,
-        pageFling: true,
+      body: SfPdfViewer.asset(
+        widget.pdfPath,
       ),
     );
   }
 }
-
-/**
- * import 'package:flutter/material.dart';
-    import 'package:flutter_pdfview/flutter_pdfview.dart';
-
-    class PDFViewerScreen extends StatelessWidget {
-    final String pdfPath; // Path to your PDF file
-
-    const PDFViewerScreen({Key? key, required this.pdfPath}) : super(key: key);
-
-    @override
-    Widget build(BuildContext context) {
-    return Scaffold(
-    appBar: AppBar(
-    title: Text('PDF Viewer'),
-    ),
-    body: PDFView(
-    filePath: pdfPath,
-    enableSwipe: true, // Enable swipe to change pages
-    swipeHorizontal: true, // Set swipe direction
-    autoSpacing: false, // Adjust page spacing
-    pageFling: true, // Enable page fling
-    ),
-    );
-    }
-    }
-
- */
