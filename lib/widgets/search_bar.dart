@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:enmu_mobile/modules/scrape_enmu.dart'; // Correct import for the API folder
+import 'package:url_launcher/url_launcher.dart';
 
 class SearchTextField extends StatefulWidget {
   const SearchTextField({Key? key}) : super(key: key);
@@ -19,15 +20,39 @@ class _SearchTextFieldState extends State<SearchTextField> {
       try {
         final results = await scrapeEnmu(query);
         if (results.isNotEmpty) {
-          // Use the scaffold key's current context to show the dialog
           showDialog(
             context: _scaffoldKey.currentContext!,
             builder: (BuildContext context) {
               return AlertDialog(
-                title: const Text('Search Results'),
+                title: Text('Search Results for "$query"'), // Display the search query in title
+                titleTextStyle: TextStyle(
+                  fontWeight: FontWeight.bold, // Bold title text
+                  color: Colors.black, // Black color for the text
+                  fontSize: 20,
+                ),
                 content: SingleChildScrollView(
                   child: ListBody(
-                    children: results.take(5).map((result) => Text(result['title'] ?? '')).toList(),
+                    children: results.take(5).map((result) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            result['title'] ?? '',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(height: 4),
+                          Text(result['description'] ?? ''),
+                          InkWell(
+                            child: Text(
+                              'Read more',
+                              style: TextStyle(color: Colors.green),
+                            ),
+                            onTap: () => _launchURL(result['url'] ?? ''),
+                          ),
+                          SizedBox(height: 10),
+                        ],
+                      );
+                    }).toList(),
                   ),
                 ),
                 actions: <Widget>[
@@ -49,6 +74,13 @@ class _SearchTextFieldState extends State<SearchTextField> {
       }
     } else {
       _showErrorDialog('Search query cannot be empty.');
+    }
+  }
+
+  Future<void> _launchURL(String urlString) async {
+    final Uri url = Uri.parse(urlString);
+    if (!await launchUrl(url)) {
+      throw 'Could not launch $urlString';
     }
   }
 
@@ -77,11 +109,11 @@ class _SearchTextFieldState extends State<SearchTextField> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey, // Set the scaffold key here
+      key: _scaffoldKey,
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
-          mainAxisSize: MainAxisSize.min, // Use min to take up less space
+          mainAxisSize: MainAxisSize.min,
           children: [
             TextField(
               controller: _controller,
@@ -96,11 +128,11 @@ class _SearchTextFieldState extends State<SearchTextField> {
                   borderRadius: BorderRadius.circular(35.0),
                 ),
               ),
-              onSubmitted: (_) => _performSearch(), // You can still keep the submit on keyboard action if you want
+              onSubmitted: (_) => _performSearch(),
             ),
-            SizedBox(height: 8), // Give some space between the text field and the button
+            SizedBox(height: 8),
             ElevatedButton(
-              onPressed: _performSearch, // Call _performSearch when the button is pressed
+              onPressed: _performSearch,
               child: const Text('Search'),
             ),
           ],
