@@ -8,7 +8,7 @@ class CampusMapScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: Text('Directory Screen'),
+        child: Text('Map Screen'),
       ),
     );
   }
