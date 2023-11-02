@@ -1,18 +1,20 @@
----
 name: enmu_mobile
 description: CS458 Semester Project. This app is a university resources app for ENMU.
-publish_to: none
+publish_to: 'none' # Prevent accidental publishing to pub.dev
 version: 1.0.0+1
+
 environment:
-  sdk: '>=3.1.0 <4.0.0'
+  sdk: '>=2.17.0 <3.0.0' # Updated to enable super-parameters
 
 dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
   url_launcher: ^6.2.1
-  http: ^0.13.3   # Added the http package
-  html: ^0.15.0   # Added the html package
+  image_gallery_saver: ^2.0.3
+  syncfusion_flutter_pdfviewer: ^23.1.43
+  http: ^1.0.0 # Upgraded to a compatible version with syncfusion_flutter_pdfviewer
+  html: ^0.15.0
 
 dev_dependencies:
   flutter_test:
