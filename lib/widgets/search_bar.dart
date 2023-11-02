@@ -19,7 +19,6 @@ class _SearchTextFieldState extends State<SearchTextField> {
       try {
         final results = await scrapeEnmu(query);
         if (results.isNotEmpty) {
-          // Use the scaffold key's current context to show the dialog
           showDialog(
             context: _scaffoldKey.currentContext!,
             builder: (BuildContext context) {
@@ -77,33 +76,36 @@ class _SearchTextFieldState extends State<SearchTextField> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey, // Set the scaffold key here
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min, // Use min to take up less space
-          children: [
-            TextField(
-              controller: _controller,
-              maxLength: 50,
-              minLines: 1,
-              maxLines: 3,
-              decoration: InputDecoration(
-                contentPadding: const EdgeInsets.all(15),
-                hintText: 'Search ENMU:',
-                hintStyle: const TextStyle(fontSize: 18),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(35.0),
+      key: _scaffoldKey,
+      body: SingleChildScrollView( // Added SingleChildScrollView here
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                controller: _controller,
+                maxLength: 50,
+                minLines: 1,
+                maxLines: 3,
+                decoration: InputDecoration(
+                  contentPadding: const EdgeInsets.all(15),
+                  hintText: 'Search ENMU:',
+                  hintStyle: const TextStyle(fontSize: 18),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(35.0),
+                  ),
                 ),
+                onSubmitted: (_) => _performSearch(),
               ),
-              onSubmitted: (_) => _performSearch(), // You can still keep the submit on keyboard action if you want
-            ),
-            SizedBox(height: 8), // Give some space between the text field and the button
-            ElevatedButton(
-              onPressed: _performSearch, // Call _performSearch when the button is pressed
-              child: const Text('Search'),
-            ),
-          ],
+              SizedBox(height: 8),
+              ElevatedButton(
+                onPressed: _performSearch,
+                child: const Text('Search'),
+              ),
+              // ... other widgets if any
+            ],
+          ),
         ),
       ),
     );
