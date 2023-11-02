@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:enmu_mobile/api/scrape_enmu.dart'; // Correct import for the API folder
+import 'package:enmu_mobile/modules/scrape_enmu.dart'; // Correct import for the API folder
 
 class SearchTextField extends StatefulWidget {
   const SearchTextField({Key? key}) : super(key: key);
