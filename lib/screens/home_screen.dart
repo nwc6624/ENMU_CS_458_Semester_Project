@@ -18,7 +18,10 @@ class MyHomePage extends StatelessWidget {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.symmetric(
+            vertical: 25,
+            horizontal: 16,
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.stretch,

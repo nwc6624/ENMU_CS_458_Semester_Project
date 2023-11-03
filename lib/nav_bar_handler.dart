@@ -51,7 +51,7 @@ class _NavBarHandlerState extends State<NavBarHandler> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text('ENMUmobile',
         ),
