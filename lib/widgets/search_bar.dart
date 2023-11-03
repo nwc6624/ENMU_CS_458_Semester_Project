@@ -14,6 +14,9 @@ class _SearchTextFieldState extends State<SearchTextField> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   Future<void> _performSearch() async {
+    // Dismiss the keyboard
+    FocusScope.of(context).unfocus();
+
     final query = _controller.text;
 
     if (query.isNotEmpty) {
