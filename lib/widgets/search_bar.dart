@@ -24,10 +24,10 @@ class _SearchTextFieldState extends State<SearchTextField> {
             context: _scaffoldKey.currentContext!,
             builder: (BuildContext context) {
               return AlertDialog(
-                title: Text('Search Results for "$query"'), // Display the search query in title
+                title: Text('Search Results for "$query"'),
                 titleTextStyle: TextStyle(
-                  fontWeight: FontWeight.bold, // Bold title text
-                  color: Colors.black, // Black color for the text
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
                   fontSize: 20,
                 ),
                 content: SingleChildScrollView(
@@ -128,6 +128,8 @@ class _SearchTextFieldState extends State<SearchTextField> {
                   borderRadius: BorderRadius.circular(35.0),
                 ),
               ),
+              autocorrect: true,
+              enableSuggestions: true,
               onSubmitted: (_) => _performSearch(),
             ),
             SizedBox(height: 8),
