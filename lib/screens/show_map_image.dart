@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
-
+//https://developers.google.com/maps/flutter-package/config
 class MapImage extends StatefulWidget {
   const MapImage({super.key, required this.pdfPath});
 
