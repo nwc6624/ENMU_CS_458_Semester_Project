@@ -39,8 +39,8 @@ class MyHomePage extends StatelessWidget {
                     GestureDetector(
                       child: const SafeRideCard(
                         title: 'SafeRide',
-                        date: 'Monday-Saturday',
-                        time: '6pm-3am',
+                        date: 'Thursday-Sunday',
+                        time: '8am-12am',
                       ),
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(

@@ -1,58 +1,53 @@
+
 #https://www.enmu.edu/robots.txt   --> Scraping guidlines via ENMU 
-#10/15/2023
-# Version 1.0
+#10/31/2023
+# Version 1.2
 # Author@ Noah Caulfield
 # API for enmu query results 
 
 #TEST Query "Computer Science"
 #http://127.0.0.1:5000/search?query=computer+science
 
+#http://127.0.0.1:5000/search?query=pdfmap     (Template for retrieving campus .pdf)
+
 
 #pip install chalice
 
-"release 1.d0"
-
 ################################################
-
-from flask import Flask, request, jsonify
+# pip install chalice flask requests BeautifulSoup4
+from flask import Flask, request, jsonify, Response
 import requests
 from bs4 import BeautifulSoup
 
 app = Flask(__name__)
 
-# Function to scrape search results from https://enmu.edu/
-def scrape_enmu(query):
-    """
-    Scrapes search results from https://enmu.edu/ for a given query.
+BASE_URL = "https://enmu.edu/"
 
-    Args:
-        query (str): The search query.
-
-    Returns:
-        list: A list of search results, each containing a title, description, and URL.
-              Example: [{'title': 'Result Title', 'description': 'Result Description', 'url': 'Result URL'}, ...]
-              Returns None if unable to fetch results.
-    """
-    base_url = "https://enmu.edu/"
-    search_url = f"{base_url}/search"
-    params = {"q": query}
-
-    # Define headers to mimic a web browser's user-agent
-    headers = {
+def fetch_web_content(url, params=None):
+    HEADERS = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
     }
 
-    # Send an HTTP GET request with headers
-    response = requests.get(search_url, params=params, headers=headers)
+    try:
+        response = requests.get(url, params=params, headers=HEADERS)
 
-    if response.status_code == 200:
-        soup = BeautifulSoup(response.text, 'html.parser')
+        if response.status_code == 200:
+            return response.content
 
-        # Extract the search results from the specific HTML structure
+    except requests.RequestException:
+        pass
+
+    return None
+
+def scrape_enmu(query):
+    search_url = f"{BASE_URL}/search"
+    content = fetch_web_content(search_url, {"q": query})
+
+    if content:
+        soup = BeautifulSoup(content, 'html.parser')
         results = []
-        result_elements = soup.find_all('li')
 
-        for result_element in result_elements:
+        for result_element in soup.find_all('li'):
             title_element = result_element.find('h4')
             description_element = result_element.find('p')
             link_element = result_element.find('a')
@@ -60,32 +55,36 @@ def scrape_enmu(query):
             if title_element and description_element and link_element:
                 title = title_element.text.strip()
                 description = description_element.text.strip()
-                url = base_url + link_element['href']
+                url = BASE_URL + link_element['href']
                 results.append({'title': title, 'description': description, 'url': url})
 
         return results
-    else:
-        return None
+
+    return None
 
 @app.route('/search', methods=['GET'])
 def search():
-    """
-    Retrieves search results based on a query and returns them as JSON.
-
-    Example Usage:
-    To search for "Computer Science," visit http://127.0.0.1:5000/search?query=computer+science
-
-    Returns:
-        JSON: A JSON response containing the search results, each including title, description, and URL.
-              Returns an error message if unable to fetch results.
-    """
     query = request.args.get('query')
 
-    # Scrape search results from https://enmu.edu/
+    if not query:
+        return "Error: No query parameter provided."
+
+    # Check for "pdfmap" query
+    if query.lower() == "pdfmap":
+        map_pdf_url = "https://www.enmu.edu/images/admissions/campus-map-southeast-of-us70.pdf"
+        pdf_content = fetch_web_content(map_pdf_url)
+
+        if pdf_content:
+            return Response(pdf_content, content_type='application/pdf')
+        else:
+            return "Error: Unable to fetch the campus map."
+
     results = scrape_enmu(query)
 
     if results:
-        return jsonify(results)  # Return the data as JSON
+        # Limit the results to top 5
+        limited_results = results[:5]
+        return jsonify(limited_results)
     else:
         return "Error: Unable to fetch results."
 
