@@ -56,7 +56,7 @@ class SafeRide extends StatelessWidget {
                     onPressed: () => _makePhoneCall('5756079995'),
                     child: const Text(
                       '575.607.9995',
-                      style: TextStyle(
+                      style: TextStyle(  //TODO: if screen size is small enough, font needs to be 20. Otherwise, 22.
                         fontSize: 22,
                       ),
                     ),
@@ -65,7 +65,7 @@ class SafeRide extends StatelessWidget {
                     onPressed: () => _makePhoneCall('5756075999'),
                     child: const Text(
                       '575.607.5999',
-                      style: TextStyle(
+                      style: TextStyle(  //TODO: if screen size is small enough, font needs to be 20. Otherwise, 22.
                         fontSize: 22,
                       ),
                     ),

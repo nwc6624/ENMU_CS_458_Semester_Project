@@ -8,6 +8,8 @@ import 'safe_ride_screen.dart';
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
 
+  //TODO: If in landscape, screen should be scrollable.
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -24,13 +26,16 @@ class MyHomePage extends StatelessWidget {
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+            // crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const SearchTextField(),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: SearchTextField(),
+              ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.end,
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+                // mainAxisSize: MainAxisSize.min,
+                // crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   GestureDetector(
                     child: const SafeRideCard(
