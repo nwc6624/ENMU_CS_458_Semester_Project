@@ -5,6 +5,9 @@ import 'package:url_launcher/url_launcher.dart';
 class SafeRide extends StatelessWidget {
   const SafeRide({super.key});
 
+  final double font22 = 22;
+  final double font20 = 20;
+
   void _makePhoneCall(String phoneNumber) async {
     final Uri phoneCall = Uri(scheme: 'tel', path: phoneNumber);
     if (await canLaunchUrl(phoneCall)) {
@@ -23,11 +26,17 @@ class SafeRide extends StatelessWidget {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
-    final Uri toLaunch =
-    Uri(scheme: 'https', host: 'www.facebook.com', path: 'ENMU-Safe-Ride-335186049837100/');
+    final width = MediaQuery.of(context)
+        .size
+        .width; // Screen width to determine font sizes
+    print("width: $width");
+    final Uri toLaunch = Uri(
+        scheme: 'https',
+        host: 'www.facebook.com',
+        path: 'ENMU-Safe-Ride-335186049837100/');
+
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -54,19 +63,19 @@ class SafeRide extends StatelessWidget {
                 children: [
                   TextButton(
                     onPressed: () => _makePhoneCall('5756079995'),
-                    child: const Text(
+                    child: Text(
                       '575.607.9995',
-                      style: TextStyle(  //TODO: if screen size is small enough, font needs to be 20. Otherwise, 22.
-                        fontSize: 22,
+                      style: TextStyle(
+                        fontSize: width < 380 ? font20 : font22,
                       ),
                     ),
                   ),
                   TextButton(
                     onPressed: () => _makePhoneCall('5756075999'),
-                    child: const Text(
+                    child: Text(
                       '575.607.5999',
-                      style: TextStyle(  //TODO: if screen size is small enough, font needs to be 20. Otherwise, 22.
-                        fontSize: 22,
+                      style: TextStyle(
+                        fontSize: width < 380 ? font20 : font22,
                       ),
                     ),
                   ),
@@ -75,13 +84,13 @@ class SafeRide extends StatelessWidget {
               const SizedBox(
                 height: 16,
               ),
-              const Text(
+              Text(
                 'ENMU Safe Ride is a free program designated for any and all current ENMU students to be picked up and transported '
                 'safely home anywhere within Portales city limits when in unsafe situations or unable to drive due to being under the '
                 'influence. The operating hours are Thursdays from 8 a.m. to Sunday at 12 a.m. The drivers are students and keep the '
                 'program private and confidential.',
                 style: TextStyle(
-                  fontSize: 22,
+                  fontSize: width < 380 ? font20 : font22,
                 ),
               ),
             ],
