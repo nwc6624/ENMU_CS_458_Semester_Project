@@ -52,7 +52,7 @@ class MyHomePage extends StatelessWidget {
                     GestureDetector(
                       child: const EmergencyCard(
                         title: 'Emergency',
-                        icon: Icons.local_police,
+                        icon: Icon(Icons.local_police),
                       ),
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(

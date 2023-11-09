@@ -8,7 +8,7 @@ class EmergencyCard extends StatelessWidget {
   });
 
   final String title;
-  final IconData icon;
+  final Icon icon;
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +18,12 @@ class EmergencyCard extends StatelessWidget {
           title,
           style: const TextStyle(fontSize: 30),
         ),
-        trailing: Icon(
-          icon,
+        trailing: IconButton(
+          iconSize: 35,
+          tooltip: "Call ENMU Police",
+          onPressed: () {},
+          icon: icon,
           color: Colors.red,
-          size: 35,
         ),
       ),
     );
