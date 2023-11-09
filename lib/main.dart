@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:enmu_mobile/nav_bar_handler.dart';
+import 'package:enmu_mobile/screens/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const NavBarHandler(),
+      home: const SplashScreen(),
     );
   }
 }
