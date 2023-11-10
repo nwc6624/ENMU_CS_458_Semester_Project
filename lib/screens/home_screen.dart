@@ -4,7 +4,6 @@ import '../widgets/emergency_card.dart';
 import '../widgets/saferide_card.dart';
 import '../widgets/search_bar.dart';
 import 'safe_ride_screen.dart';
-
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
 
@@ -12,7 +11,6 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // Dismiss the keyboard when the user taps outside the TextField
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
@@ -26,29 +24,38 @@ class MyHomePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const SearchTextField(),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  GestureDetector(
-                    child: const SafeRideCard(
-                      title: 'SafeRide',
-                      date: 'Thursday-Sunday',
-                      time: '8am-12am',
-                    ),
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const SafeRide()));
-                    },
+              Flexible(
+                // This makes the search bar flexible in terms of height, it will take the space it needs
+                child: Padding(
+                  padding: EdgeInsets.all(16),
+                  child: SearchTextField(),
+                ),
+              ),
+              Expanded(
+                // This makes the remaining space be allocated here
+                child: SingleChildScrollView(
+                  // This makes the column scrollable if the content is too big
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => const SafeRide()));
+                        },
+                        child: const SafeRideCard(
+                          title: 'SafeRide',
+                          date: 'Monday-Saturday',
+                          time: '6pm-3am',
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      const EmergencyCard(
+                        title: 'Emergency',
+                        icon: Icons.local_police,
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 16),
-                  const EmergencyCard(
-                    title: 'Emergency',
-                    icon: Icons.local_police,
-                  ),
-                ],
+                ),
               ),
             ],
           ),
