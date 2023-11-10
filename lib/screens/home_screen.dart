@@ -14,9 +14,15 @@ class MyHomePage extends StatelessWidget {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 10),
+          padding: const EdgeInsets.symmetric(
+            vertical: 25,
+            horizontal: 16,
+          ),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Flexible(
                 // This makes the search bar flexible in terms of height, it will take the space it needs

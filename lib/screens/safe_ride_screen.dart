@@ -14,13 +14,25 @@ class SafeRide extends StatelessWidget {
     }
   }
 
+  Future<void> _launchInBrowser(Uri url) async {
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw Exception('Could not launch $url');
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
+    final Uri toLaunch =
+    Uri(scheme: 'https', host: 'www.facebook.com', path: 'ENMU-Safe-Ride-335186049837100/');
     return Scaffold(
       appBar: AppBar(
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () => _launchInBrowser(toLaunch),
             icon: const Icon(Icons.facebook),
           )
         ],

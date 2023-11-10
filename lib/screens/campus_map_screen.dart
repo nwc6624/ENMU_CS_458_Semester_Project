@@ -5,8 +5,11 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'show_map_image.dart'; // Ensure this is the correct path to your file
 
+import 'show_map_image.dart';
+
 class CampusMapScreen extends StatelessWidget {
-  const CampusMapScreen({Key? key}) : super(key: key);
+  const CampusMapScreen({super.key});
+
 
   void navigateToFullScreenImage(BuildContext context, String pdfPath) {
     Navigator.push(
