@@ -5,8 +5,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'show_map_image.dart'; // Ensure this is the correct path to your file
 
-import 'show_map_image.dart';
-
 class CampusMapScreen extends StatelessWidget {
   const CampusMapScreen({super.key});
 
@@ -23,8 +21,8 @@ class CampusMapScreen extends StatelessWidget {
   Future<void> _launchMapsUrl() async {
     const double latitude = 34.186192;
     const double longitude = -103.334398;
-    final String googleMapsUrl = "https://www.google.com/maps/search/?api=1&query=$latitude,$longitude";
-    final String appleMapsUrl = "https://maps.apple.com/?q=$latitude,$longitude";
+    const String googleMapsUrl = "https://www.google.com/maps/search/?api=1&query=$latitude,$longitude";
+    const String appleMapsUrl = "https://maps.apple.com/?q=$latitude,$longitude";
 
     if (await canLaunch(googleMapsUrl)) {
       await launch(googleMapsUrl);

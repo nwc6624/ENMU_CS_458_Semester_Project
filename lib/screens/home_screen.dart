@@ -24,7 +24,7 @@ class MyHomePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Flexible(
+              const Flexible(
                 // This makes the search bar flexible in terms of height, it will take the space it needs
                 child: Padding(
                   padding: EdgeInsets.all(16),
