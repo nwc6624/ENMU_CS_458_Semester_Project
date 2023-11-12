@@ -17,11 +17,11 @@ class MyApp extends StatelessWidget {
       title: 'ENMUmobile',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.green.shade900,
+          seedColor: const Color.fromRGBO(0, 101, 51, 1),
         ),
         appBarTheme: const AppBarTheme().copyWith(
           foregroundColor: Colors.white,
-          backgroundColor: Colors.green.shade900,
+          backgroundColor: const Color.fromRGBO(0, 101, 51, 1),
           iconTheme: const IconThemeData(
             color: Colors.white,
           ),
