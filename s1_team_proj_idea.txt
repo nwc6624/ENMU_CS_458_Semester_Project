@@ -1,0 +1,16 @@
+s1_team_proj_idea.txt
+
+
+- Noah Caulfield 
+- Jake Gill
+
+
+Our project centers around developing a custom university resources application specifically designed for ENMU students. 
+This application's primary goal is to offer students easy access to crucial information, including things such as campus maps,
+safety ride contacts, advisor contact details, and more. Following our presentation on September 19th, our next plans involve 
+creating a user-friendly interface for the application where students can input ENMU-related queries. The application
+will then employ web scraping techniques to extract the most precise and relevant information from the university's website,
+ensuring users receive accurate and pertinent responses. We are currently in the process of finalizing the technical aspects
+and logistics of the project, and we are scheduling a meeting with Dr. Edgar Eduardo Ceh-Varela to seek guidance on the
+technologies and machine learning concepts we will be implementing.
+ 
