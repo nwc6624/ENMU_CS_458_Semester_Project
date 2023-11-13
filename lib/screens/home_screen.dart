@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 import '../widgets/emergency_card.dart';
+import '../widgets/holiday_card.dart'; // Import for HolidayCard
 import '../widgets/saferide_card.dart';
 import '../widgets/search_bar.dart';
 import 'safe_ride_screen.dart';
+
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
 
@@ -14,27 +16,18 @@ class MyHomePage extends StatelessWidget {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
         body: Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: 25,
-            horizontal: 16,
-          ),
+          padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 10),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const Flexible(
-                // This makes the search bar flexible in terms of height, it will take the space it needs
+              Flexible(
                 child: Padding(
                   padding: EdgeInsets.all(16),
                   child: SearchTextField(),
                 ),
               ),
               Expanded(
-                // This makes the remaining space be allocated here
                 child: SingleChildScrollView(
-                  // This makes the column scrollable if the content is too big
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -53,6 +46,11 @@ class MyHomePage extends StatelessWidget {
                         title: 'Emergency',
                         icon: Icons.local_police,
                       ),
+                      const SizedBox(height: 16),
+                      const HolidayCard(
+                        title: 'Next School Holiday',
+                      ),
+                      // Add more widgets if needed
                     ],
                   ),
                 ),

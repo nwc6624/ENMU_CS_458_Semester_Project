@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
-import '../modules/enmu_directory_api.dart'; // Ensure the path is correct
+import 'package:webview_flutter/webview_flutter.dart';
+import '../modules/enmu_directory_api.dart'; // Ensure this path is correct for your project
 
 class DirectoryScreen extends StatefulWidget {
   const DirectoryScreen({Key? key}) : super(key: key);
@@ -33,8 +33,8 @@ class _DirectoryScreenState extends State<DirectoryScreen> {
   }
 
   void resetSearch() {
-    FocusScope.of(context).unfocus(); // This will dismiss the keyboard
-    _searchController.clear(); // This will clear the search field
+    FocusScope.of(context).unfocus();
+    _searchController.clear();
 
     setState(() {
       searchQuery = '';
@@ -50,7 +50,7 @@ class _DirectoryScreenState extends State<DirectoryScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),
-            onPressed: resetSearch, // Calls the resetSearch method when pressed
+            onPressed: resetSearch,
           ),
         ],
         bottom: PreferredSize(
@@ -58,9 +58,9 @@ class _DirectoryScreenState extends State<DirectoryScreen> {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
-              controller: _searchController, // Connect the TextEditingController
+              controller: _searchController,
               onChanged: updateSearchQuery,
-              style: const TextStyle(color: Colors.white), // White text color
+              style: const TextStyle(color: Colors.white),
               decoration: InputDecoration(
                 hintText: 'Search...',
                 hintStyle: TextStyle(color: Colors.white.withOpacity(0.7)),
@@ -92,13 +92,17 @@ class _DirectoryScreenState extends State<DirectoryScreen> {
                   return ListTile(
                     title: Text(directory['title'] ?? 'No title'),
                     subtitle: const Text('Read more'),
-                    onTap: () async {
+                    onTap: () {
                       final url = directory['url'];
-                      if (url != null && await canLaunch(url)) {
-                        await launch(url);
+                      if (url != null) {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => WebViewScreen(url: url),
+                          ),
+                        );
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Could not launch $url')),
+                          SnackBar(content: Text('URL not available')),
                         );
                       }
                     },
@@ -107,10 +111,52 @@ class _DirectoryScreenState extends State<DirectoryScreen> {
               );
             }
           } else {
-            // This case should not be possible if your Future is set up correctly
             return const Center(child: Text('Something went wrong.'));
           }
         },
+      ),
+    );
+  }
+}
+
+class WebViewScreen extends StatefulWidget {
+  final String url;
+
+  const WebViewScreen({Key? key, required this.url}) : super(key: key);
+
+  @override
+  _WebViewScreenState createState() => _WebViewScreenState();
+}
+
+class _WebViewScreenState extends State<WebViewScreen> {
+  bool _isLoading = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Web View'),
+      ),
+      body: Stack(
+        children: <Widget>[
+          WebView(
+            initialUrl: widget.url,
+            javascriptMode: JavascriptMode.unrestricted,
+            onPageStarted: (String url) {
+              setState(() {
+                _isLoading = true;
+              });
+            },
+            onPageFinished: (String url) {
+              setState(() {
+                _isLoading = false;
+              });
+            },
+          ),
+          _isLoading
+              ? const Center(child: CircularProgressIndicator())
+              : Container(),
+        ],
       ),
     );
   }
