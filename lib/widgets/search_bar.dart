@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:enmu_mobile/modules/scrape_enmu.dart'; // Correct import for the API folder
-import 'package:url_launcher/url_launcher.dart';
+import 'package:webview_flutter/webview_flutter.dart'; // Import for WebView
 
 class SearchTextField extends StatefulWidget {
   const SearchTextField({Key? key}) : super(key: key);
@@ -80,11 +80,13 @@ class _SearchTextFieldState extends State<SearchTextField> {
     }
   }
 
-  Future<void> _launchURL(String urlString) async {
+  void _launchURL(String urlString) {
     final Uri url = Uri.parse(urlString);
-    if (!await launchUrl(url)) {
-      throw 'Could not launch $urlString';
-    }
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => WebViewScreen(url: url.toString()),
+      ),
+    );
   }
 
   void _showErrorDialog(String message) {
@@ -113,35 +115,56 @@ class _SearchTextFieldState extends State<SearchTextField> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextField(
-              controller: _controller,
-              maxLength: 50,
-              minLines: 1,
-              maxLines: 3,
-              decoration: InputDecoration(
-                contentPadding: const EdgeInsets.all(15),
-                hintText: 'Search ENMU:',
-                hintStyle: const TextStyle(fontSize: 18),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(35.0),
+      body: SingleChildScrollView( // Added SingleChildScrollView
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                controller: _controller,
+                maxLength: 50,
+                minLines: 1,
+                maxLines: 3,
+                decoration: InputDecoration(
+                  contentPadding: const EdgeInsets.all(15),
+                  hintText: 'Search ENMU:',
+                  hintStyle: const TextStyle(fontSize: 18),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(35.0),
+                  ),
                 ),
+                autocorrect: true,
+                enableSuggestions: true,
+                onSubmitted: (_) => _performSearch(),
               ),
-              autocorrect: true,
-              enableSuggestions: true,
-              onSubmitted: (_) => _performSearch(),
-            ),
-            SizedBox(height: 8),
-            ElevatedButton(
-              onPressed: _performSearch,
-              child: const Text('Search'),
-            ),
-          ],
+              SizedBox(height: 8),
+              ElevatedButton(
+                onPressed: _performSearch,
+                child: const Text('Search'),
+              ),
+            ],
+          ),
         ),
+      ),
+    );
+  }
+}
+
+class WebViewScreen extends StatelessWidget {
+  final String url;
+
+  const WebViewScreen({Key? key, required this.url}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Web View'),
+      ),
+      body: WebView(
+        initialUrl: url,
+        javascriptMode: JavascriptMode.unrestricted, // Ensures JavaScript can run
       ),
     );
   }
