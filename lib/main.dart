@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
 
 import 'package:enmu_mobile/nav_bar_handler.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
-void main() {
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Future.delayed(const Duration(seconds: 10));
+  // WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setEnabledSystemUIMode(
+    SystemUiMode.manual,
+    overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top],
+  );
+  FlutterNativeSplash.remove();
   runApp(const MyApp());
 }
 
