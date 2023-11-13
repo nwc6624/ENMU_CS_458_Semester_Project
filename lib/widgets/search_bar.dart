@@ -3,7 +3,10 @@ import 'package:enmu_mobile/modules/scrape_enmu.dart'; // Correct import for the
 import 'package:webview_flutter/webview_flutter.dart'; // Import for WebView
 
 class SearchTextField extends StatefulWidget {
-  const SearchTextField({Key? key}) : super(key: key);
+  const SearchTextField({Key? key, required this.scaffoldKey})
+      : super(key: key);
+
+  final GlobalKey<ScaffoldState> scaffoldKey;
 
   @override
   _SearchTextFieldState createState() => _SearchTextFieldState();
@@ -11,7 +14,6 @@ class SearchTextField extends StatefulWidget {
 
 class _SearchTextFieldState extends State<SearchTextField> {
   final TextEditingController _controller = TextEditingController();
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   Future<void> _performSearch() async {
     // Dismiss the keyboard
@@ -24,11 +26,11 @@ class _SearchTextFieldState extends State<SearchTextField> {
         final results = await scrapeEnmu(query);
         if (results.isNotEmpty) {
           showDialog(
-            context: _scaffoldKey.currentContext!,
+            context: widget.scaffoldKey.currentContext!,
             builder: (BuildContext context) {
               return AlertDialog(
                 title: Text('Search Results for "$query"'),
-                titleTextStyle: TextStyle(
+                titleTextStyle: const TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
                   fontSize: 20,
@@ -41,18 +43,18 @@ class _SearchTextFieldState extends State<SearchTextField> {
                         children: [
                           Text(
                             result['title'] ?? '',
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
-                          SizedBox(height: 4),
+                          const SizedBox(height: 4),
                           Text(result['description'] ?? ''),
                           InkWell(
-                            child: Text(
+                            child: const Text(
                               'Read more',
                               style: TextStyle(color: Colors.green),
                             ),
                             onTap: () => _launchURL(result['url'] ?? ''),
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                         ],
                       );
                     }).toList(),
@@ -69,6 +71,7 @@ class _SearchTextFieldState extends State<SearchTextField> {
               );
             },
           );
+          _controller.clear(); // Remove TextField content
         } else {
           _showErrorDialog('No results found.');
         }
@@ -90,9 +93,9 @@ class _SearchTextFieldState extends State<SearchTextField> {
   }
 
   void _showErrorDialog(String message) {
-    if (_scaffoldKey.currentContext != null) {
+    if (widget.scaffoldKey.currentContext != null) {
       showDialog(
-        context: _scaffoldKey.currentContext!,
+        context: widget.scaffoldKey.currentContext!,
         builder: (BuildContext context) {
           return AlertDialog(
             title: const Text('Error'),
@@ -113,40 +116,30 @@ class _SearchTextFieldState extends State<SearchTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffoldKey,
-      body: SingleChildScrollView( // Added SingleChildScrollView
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(
-                controller: _controller,
-                maxLength: 50,
-                minLines: 1,
-                maxLines: 3,
-                decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.all(15),
-                  hintText: 'Search ENMU:',
-                  hintStyle: const TextStyle(fontSize: 18),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(35.0),
-                  ),
-                ),
-                autocorrect: true,
-                enableSuggestions: true,
-                onSubmitted: (_) => _performSearch(),
-              ),
-              SizedBox(height: 8),
-              ElevatedButton(
-                onPressed: _performSearch,
-                child: const Text('Search'),
-              ),
-            ],
+    return Column(
+      children: [
+        TextField(
+          controller: _controller,
+          maxLength: 50,
+          minLines: 1,
+          maxLines: 3,
+          decoration: InputDecoration(
+            contentPadding: const EdgeInsets.all(15),
+            hintText: 'Search ENMU:',
+            hintStyle: const TextStyle(fontSize: 18),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(35.0),
+            ),
           ),
+          autocorrect: true,
+          enableSuggestions: true,
+          onSubmitted: (_) => _performSearch(),
         ),
-      ),
+        ElevatedButton(
+          onPressed: () => _performSearch(),
+          child: const Text('Search'),
+        ),
+      ],
     );
   }
 }
@@ -159,12 +152,12 @@ class WebViewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Web View'),
+      appBar: AppBar(title: const Text("ENMUmobile"),
       ),
       body: WebView(
         initialUrl: url,
-        javascriptMode: JavascriptMode.unrestricted, // Ensures JavaScript can run
+        javascriptMode:
+            JavascriptMode.unrestricted, // Ensures JavaScript can run
       ),
     );
   }

@@ -4,7 +4,6 @@ import '../modules/enmu_directory_api.dart'; // Ensure this path is correct for 
 
 class DirectoryScreen extends StatefulWidget {
   const DirectoryScreen({Key? key}) : super(key: key);
-  static const String routeName = '/directory';
 
   @override
   _DirectoryScreenState createState() => _DirectoryScreenState();
@@ -24,11 +23,11 @@ class _DirectoryScreenState extends State<DirectoryScreen> {
   void updateSearchQuery(String newQuery) {
     setState(() {
       searchQuery = newQuery.toLowerCase();
-      directoriesFuture = scrapeEnmuDirectories()
-          .then((list) => list.where((directory) {
-        final titleLower = directory['title']?.toLowerCase() ?? '';
-        return titleLower.contains(searchQuery);
-      }).toList());
+      directoriesFuture =
+          scrapeEnmuDirectories().then((list) => list.where((directory) {
+                final titleLower = directory['title']?.toLowerCase() ?? '';
+                return titleLower.contains(searchQuery);
+              }).toList());
     });
   }
 
@@ -56,7 +55,7 @@ class _DirectoryScreenState extends State<DirectoryScreen> {
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(kToolbarHeight),
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8),
             child: TextField(
               controller: _searchController,
               onChanged: updateSearchQuery,
@@ -102,7 +101,7 @@ class _DirectoryScreenState extends State<DirectoryScreen> {
                         );
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('URL not available')),
+                          const SnackBar(content: Text('URL not available')),
                         );
                       }
                     },

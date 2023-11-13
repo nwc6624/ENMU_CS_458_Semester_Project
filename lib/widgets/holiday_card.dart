@@ -18,7 +18,7 @@ class HolidayCard extends StatefulWidget {
 
 class _HolidayCardState extends State<HolidayCard> {
   Timer? _timer;
-  Duration _timeRemaining = Duration();
+  Duration _timeRemaining = const Duration();
   late DateTime holidayDate;
 
   @override
@@ -42,7 +42,7 @@ class _HolidayCardState extends State<HolidayCard> {
   }
 
   void _startTimer() {
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         final now = DateTime.now();
         if (holidayDate.isAfter(now)) {

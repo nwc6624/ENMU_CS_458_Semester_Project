@@ -4,7 +4,6 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 
 class SportsScreen extends StatefulWidget {
   const SportsScreen({Key? key}) : super(key: key);
-  static const String route = '/sports';
 
   @override
   _SportsScreenState createState() => _SportsScreenState();
@@ -54,8 +53,9 @@ class _SportsScreenState extends State<SportsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Eastern Athletics'),
+      appBar:
+      AppBar(
+        title: const Text('ENMU Athletics'),
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),
@@ -94,8 +94,8 @@ class _SportsScreenState extends State<SportsScreen> {
               : Container(),
         ],
       )
-          : Center(
-        child: const Text('No Internet Connection'),
+          : const Center(
+        child: Text('No Internet Connection'),
       ),
     );
   }

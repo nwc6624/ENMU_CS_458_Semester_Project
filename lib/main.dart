@@ -6,8 +6,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Future.delayed(const Duration(seconds: 10));
-  // WidgetsFlutterBinding.ensureInitialized();
+  await Future.delayed(const Duration(seconds: 8));
   SystemChrome.setEnabledSystemUIMode(
     SystemUiMode.manual,
     overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top],
@@ -24,7 +23,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'ENMUmobile',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: const Color.fromRGBO(0, 101, 51, 1),

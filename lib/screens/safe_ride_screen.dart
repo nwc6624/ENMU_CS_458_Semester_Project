@@ -26,6 +26,8 @@ class SafeRide extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    print("screen width: $screenWidth");
     final Uri toLaunch =
     Uri(scheme: 'https', host: 'www.facebook.com', path: 'ENMU-Safe-Ride-335186049837100/');
     return Scaffold(
@@ -37,7 +39,7 @@ class SafeRide extends StatelessWidget {
           )
         ],
         title: const Text(
-          'ENMUmobile',
+          'Safe Ride',
         ),
       ),
       body: SingleChildScrollView(
