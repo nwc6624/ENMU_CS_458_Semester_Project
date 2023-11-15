@@ -26,7 +26,7 @@ class _MyHomePageState extends State<MyHomePage> {
         decoration: const BoxDecoration(
           image: DecorationImage(
             fit: BoxFit.fitWidth,
-            image: AssetImage("assets/images/greyhound_logo-transformed.png"),
+            image: AssetImage("assets/images/SplashLogo4.png"),
           ),
         ),
         child: Scaffold(
