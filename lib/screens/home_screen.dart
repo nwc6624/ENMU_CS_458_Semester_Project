@@ -62,8 +62,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         },
                         child: const SafeRideCard(
                           title: 'SafeRide',
-                          date: 'Monday-Saturday',
-                          time: '6pm-3am',
+                          date: 'Thursday-Sunday',
+                          time: '8am-12am',
                         ),
                       ),
                       const SizedBox(height: 16),
