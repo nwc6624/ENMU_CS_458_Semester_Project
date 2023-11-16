@@ -9,7 +9,7 @@ class SearchTextField extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
 
   @override
-  _SearchTextFieldState createState() => _SearchTextFieldState();
+  State<SearchTextField> createState() => _SearchTextFieldState();
 }
 
 class _SearchTextFieldState extends State<SearchTextField> {

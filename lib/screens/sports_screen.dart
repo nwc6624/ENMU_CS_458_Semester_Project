@@ -6,7 +6,7 @@ class SportsScreen extends StatefulWidget {
   const SportsScreen({Key? key}) : super(key: key);
 
   @override
-  _SportsScreenState createState() => _SportsScreenState();
+  State<SportsScreen> createState() => _SportsScreenState();
 }
 
 class _SportsScreenState extends State<SportsScreen> {

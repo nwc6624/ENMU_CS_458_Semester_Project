@@ -6,7 +6,7 @@ class DirectoryScreen extends StatefulWidget {
   const DirectoryScreen({Key? key}) : super(key: key);
 
   @override
-  _DirectoryScreenState createState() => _DirectoryScreenState();
+  State<DirectoryScreen> createState() => _DirectoryScreenState();
 }
 
 class _DirectoryScreenState extends State<DirectoryScreen> {
@@ -124,7 +124,7 @@ class WebViewScreen extends StatefulWidget {
   const WebViewScreen({Key? key, required this.url}) : super(key: key);
 
   @override
-  _WebViewScreenState createState() => _WebViewScreenState();
+  State<WebViewScreen> createState() => _WebViewScreenState();
 }
 
 class _WebViewScreenState extends State<WebViewScreen> {
