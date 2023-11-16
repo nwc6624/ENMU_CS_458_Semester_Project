@@ -52,10 +52,10 @@ class _NavBarHandlerState extends State<NavBarHandler> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        title: const Text('ENMUmobile',
-        ),
-      ),
+      // appBar: AppBar(
+      //   title: const Text('ENMUmobile',
+      //   ),
+      // ),
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Theme.of(context).colorScheme.primary,
         unselectedItemColor: Theme.of(context).colorScheme.secondary,

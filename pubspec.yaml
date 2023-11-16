@@ -13,10 +13,13 @@ dependencies:
   url_launcher: ^6.2.1
   cupertino_icons: ^1.0.2
   image_gallery_saver: ^2.0.3
+  connectivity_plus: ^5.0.1
   syncfusion_flutter_pdfviewer: ^23.1.43
+  webview_flutter: ^3.0.3
   flutter_map: ^6.0.1
   http: ^1.0.0
   html: ^0.15.0
+  flutter_native_splash: ^2.3.5
 
 dev_dependencies:
   flutter_test:
@@ -26,8 +29,9 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/images/safe-ride-logo.png
-    - assets/images/campus-map-whole.pdf
-    - assets/images/campus-map-northwest-us70.pdf
-    - assets/images/campus-map-southeast-of-us70.pdf
+    - assets/images/
+#    - safe-ride-logo.png
+#    - assets/images/campus-map-whole.pdf
+#    - assets/images/campus-map-northwest-us70.pdf
+#    - assets/images/campus-map-southeast-of-us70.pdf
 
