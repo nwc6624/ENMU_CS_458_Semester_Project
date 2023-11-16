@@ -2,20 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:enmu_mobile/modules/scrape_enmu.dart'; // Correct import for the API folder
 import 'package:webview_flutter/webview_flutter.dart'; // Import for WebView
 
-class SearchTextField extends StatefulWidget {
-  const SearchTextField({Key? key, required this.scaffoldKey})
+class SearchTextField extends StatelessWidget {
+  SearchTextField({Key? key, required this.scaffoldKey})
       : super(key: key);
 
   final GlobalKey<ScaffoldState> scaffoldKey;
 
-  @override
-  State<SearchTextField> createState() => _SearchTextFieldState();
-}
-
-class _SearchTextFieldState extends State<SearchTextField> {
   final TextEditingController _controller = TextEditingController();
 
-  Future<void> _performSearch() async {
+  Future<void> _performSearch(BuildContext context) async {
     // Dismiss the keyboard
     FocusScope.of(context).unfocus();
 
@@ -26,7 +21,7 @@ class _SearchTextFieldState extends State<SearchTextField> {
         final results = await scrapeEnmu(query);
         if (results.isNotEmpty) {
           showDialog(
-            context: widget.scaffoldKey.currentContext!,
+            context: scaffoldKey.currentContext!,
             builder: (BuildContext context) {
               return AlertDialog(
                 title: Text('Search Results for "$query"'),
@@ -52,7 +47,7 @@ class _SearchTextFieldState extends State<SearchTextField> {
                               'Read more',
                               style: TextStyle(color: Colors.green),
                             ),
-                            onTap: () => _launchURL(result['url'] ?? ''),
+                            onTap: () => _launchURL(context, result['url'] ?? ''),
                           ),
                           const SizedBox(height: 10),
                         ],
@@ -83,7 +78,7 @@ class _SearchTextFieldState extends State<SearchTextField> {
     }
   }
 
-  void _launchURL(String urlString) {
+  void _launchURL(BuildContext context, String urlString) {
     final Uri url = Uri.parse(urlString);
     Navigator.of(context).push(
       MaterialPageRoute(
@@ -93,9 +88,9 @@ class _SearchTextFieldState extends State<SearchTextField> {
   }
 
   void _showErrorDialog(String message) {
-    if (widget.scaffoldKey.currentContext != null) {
+    if (scaffoldKey.currentContext != null) {
       showDialog(
-        context: widget.scaffoldKey.currentContext!,
+        context: scaffoldKey.currentContext!,
         builder: (BuildContext context) {
           return AlertDialog(
             title: const Text('Error'),
@@ -113,6 +108,7 @@ class _SearchTextFieldState extends State<SearchTextField> {
       );
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -133,10 +129,10 @@ class _SearchTextFieldState extends State<SearchTextField> {
           ),
           autocorrect: true,
           enableSuggestions: true,
-          onSubmitted: (_) => _performSearch(),
+          onSubmitted: (_) => _performSearch(context),
         ),
         ElevatedButton(
-          onPressed: () => _performSearch(),
+          onPressed: () => _performSearch(context),
           child: const Text('Search'),
         ),
       ],
