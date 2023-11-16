@@ -23,7 +23,7 @@ Future<List<Map<String, String>>> scrapeEnmu(String query) async {
 
       if (titleElement != null && descriptionElement != null && linkElement != null) {
         final hrefValue = linkElement.attributes['href']!;
-        final url = hrefValue.startsWith('/') ? baseUrl + hrefValue : baseUrl + '/' + hrefValue;
+        final url = hrefValue.startsWith('/') ? baseUrl + hrefValue : '$baseUrl/$hrefValue';
 
         final result = {
           'title': titleElement.text.trim(),

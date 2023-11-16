@@ -66,12 +66,12 @@ class _MyHomePageState extends State<MyHomePage> {
                           time: '8am-12am',
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 4),
                       const EmergencyCard(
                         title: 'Emergency',
                         icon: Icons.local_police,
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 4),
                       const HolidayCard(
                         title: 'Next School Holiday',
                       ),

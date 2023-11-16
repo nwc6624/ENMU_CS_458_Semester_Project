@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import 'show_map_image.dart'; // Ensure this is the correct path to your file
 
@@ -63,16 +63,16 @@ class _CampusMapScreenState extends State<CampusMapScreen> {
     const double latitude = 34.186192;
     const double longitude = -103.334398;
     // Google Maps URL
-    final String googleMapsUrl = "https://www.google.com/maps/search/?api=1&query=$latitude,$longitude";
+    const String googleMapsUrl = "https://www.google.com/maps/search/?api=1&query=$latitude,$longitude";
     // Intent for opening the Google Maps app directly
-    final String googleMapsAppUrl = "google.navigation:q=$latitude,$longitude&mode=d";
+    const String googleMapsAppUrl = "google.navigation:q=$latitude,$longitude&mode=d";
 
-    if (await canLaunch(googleMapsAppUrl)) {
+    if (await canLaunchUrlString(googleMapsAppUrl)) {
       // If Google Maps app is installed, launch it directly
-      await launch(googleMapsAppUrl);
-    } else if (await canLaunch(googleMapsUrl)) {
+      await launchUrlString(googleMapsAppUrl);
+    } else if (await canLaunchUrlString(googleMapsUrl)) {
       // Otherwise, open the Google Maps website
-      await launch(googleMapsUrl);
+      await launchUrlString(googleMapsUrl);
     } else {
       throw 'Could not launch Google Maps';
     }
@@ -115,14 +115,14 @@ class _CampusMapScreenState extends State<CampusMapScreen> {
     return Stack(
       children: [
         FlutterMap(
-          options: MapOptions(
-            center: LatLng(34.186192, -103.334398), // ENMU coordinates
-            zoom: 13.0,
+          options: const MapOptions(
+            initialCenter: LatLng(34.186192, -103.334398), // ENMU coordinates
+            initialZoom: 13.0,
           ),
           children: [
             TileLayer(
               urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-              subdomains: ['a', 'b', 'c'],
+              subdomains: const ['a', 'b', 'c'],
             ),
             // Additional layers can be added here
           ],
@@ -170,7 +170,7 @@ class _CampusMapScreenState extends State<CampusMapScreen> {
 }
 
 void main() {
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     home: CampusMapScreen(),
   ));
 }
