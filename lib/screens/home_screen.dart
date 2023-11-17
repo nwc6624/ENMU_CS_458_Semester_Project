@@ -69,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       const SizedBox(height: 4),
                       const EmergencyCard(
                         title: 'Emergency',
-                        icon: Icons.local_police,
+                        icon: Icon(Icons.local_police),
                       ),
                       const SizedBox(height: 4),
                       const HolidayCard(

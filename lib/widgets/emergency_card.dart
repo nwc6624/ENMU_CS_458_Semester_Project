@@ -8,7 +8,7 @@ class EmergencyCard extends StatelessWidget {
   });
 
   final String title;
-  final IconData icon;
+  final Icon icon;
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +18,40 @@ class EmergencyCard extends StatelessWidget {
           title,
           style: const TextStyle(fontSize: 30),
         ),
-        trailing: Icon(
-          icon,
+        trailing: IconButton(
+          highlightColor: Colors.lightBlue,
+          icon: icon,
           color: Colors.red,
-          size: 35,
+          onPressed: () => showDialog<String>(
+            context: context,
+            builder: (BuildContext dialogContext) {
+              return AlertDialog(
+                title: const Text('Call Campus Police'),
+                content: const Text('Are you sure you want to call?'),
+                actionsAlignment: MainAxisAlignment.spaceBetween,
+                actions: <Widget>[
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor:
+                          Theme.of(context).colorScheme.secondaryContainer,
+                    ),
+                    child: const Text('Call'),
+                    onPressed: () {
+                      Navigator.of(dialogContext).pop(); // Dismiss alert dialog
+                    },
+                  ),
+                  TextButton(
+                    child: const Text('Cancel'),
+                    onPressed: () {
+                      Navigator.of(dialogContext).pop(); // Dismiss alert dialog
+                    },
+                  ),
+                ],
+              );
+            },
+          ),
+          tooltip: "Call Campus Police",
+          iconSize: 35,
         ),
       ),
     );

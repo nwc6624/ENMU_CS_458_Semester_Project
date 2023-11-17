@@ -115,7 +115,19 @@ class _SearchTextFieldState extends State<SearchTextField> {
     }
   }
 
-  FocusNode searchBarFocus = FocusNode();
+  late FocusNode searchBarFocus;
+
+  @override
+  void initState() {
+    super.initState();
+    searchBarFocus = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    searchBarFocus.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
