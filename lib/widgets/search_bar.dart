@@ -2,11 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:enmu_mobile/modules/scrape_enmu.dart'; // Correct import for the API folder
 import 'package:webview_flutter/webview_flutter.dart'; // Import for WebView
 
-class SearchTextField extends StatelessWidget {
-  SearchTextField({Key? key, required this.scaffoldKey}) : super(key: key);
+class SearchTextField extends StatefulWidget {
+  const SearchTextField({Key? key, required this.scaffoldKey})
+      : super(key: key);
 
   final GlobalKey<ScaffoldState> scaffoldKey;
 
+  @override
+  State<SearchTextField> createState() => _SearchTextFieldState();
+}
+
+class _SearchTextFieldState extends State<SearchTextField> {
   final TextEditingController _controller = TextEditingController();
 
   Future<void> _performSearch(BuildContext context) async {
@@ -20,7 +26,7 @@ class SearchTextField extends StatelessWidget {
         final results = await scrapeEnmu(query);
         if (results.isNotEmpty) {
           showDialog(
-            context: scaffoldKey.currentContext!,
+            context: widget.scaffoldKey.currentContext!,
             builder: (BuildContext context) {
               return AlertDialog(
                 title: Text('Search Results for "$query"'),
@@ -88,9 +94,9 @@ class SearchTextField extends StatelessWidget {
   }
 
   void _showErrorDialog(String message) {
-    if (scaffoldKey.currentContext != null) {
+    if (widget.scaffoldKey.currentContext != null) {
       showDialog(
-        context: scaffoldKey.currentContext!,
+        context: widget.scaffoldKey.currentContext!,
         builder: (BuildContext context) {
           return AlertDialog(
             title: const Text('Error'),
@@ -109,21 +115,26 @@ class SearchTextField extends StatelessWidget {
     }
   }
 
-  bool isTextFieldFocused = true;
+  FocusNode searchBarFocus = FocusNode();
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         TextField(
+          focusNode: searchBarFocus,
           controller: _controller,
           maxLength: 50,
           minLines: 1,
           decoration: InputDecoration(
+            suffixIconColor: searchBarFocus.hasFocus
+                ? Theme.of(context).colorScheme.primary
+                : Theme.of(context).colorScheme.secondary,
             suffixIcon: IconButton(
-              color: isTextFieldFocused
-                  ? Theme.of(context).colorScheme.secondary
-                  : Theme.of(context).colorScheme.primary,
+              tooltip: "Submit Query",
+              color: searchBarFocus.hasFocus
+                  ? Theme.of(context).colorScheme.primary
+                  : Theme.of(context).colorScheme.secondary,
               iconSize: 26,
               onPressed: () => _performSearch(context),
               icon: const Icon(Icons.arrow_forward),
