@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 
+import '../screens/emergency_screen.dart';
+
 class EmergencyCard extends StatelessWidget {
   const EmergencyCard({
     required this.title,
@@ -27,7 +29,10 @@ class EmergencyCard extends StatelessWidget {
       builder: (BuildContext dialogContext) {
         return AlertDialog(
           title: const Text('Call Campus Police'),
-          content: const Text('Are you sure you want to call?'),
+          content: const Text(
+            'If you are in an emergency, call 911.\n'
+                'Are you sure you want to call?',
+          ),
           actionsAlignment: MainAxisAlignment.spaceBetween,
           actions: <Widget>[
             ElevatedButton(
@@ -56,6 +61,13 @@ class EmergencyCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => const EmergencyScreen(),
+            ),
+          );
+        },
         title: Text(
           title,
           style: const TextStyle(

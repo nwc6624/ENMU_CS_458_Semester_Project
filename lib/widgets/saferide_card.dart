@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../screens/safe_ride_screen.dart';
+
 class SafeRideCard extends StatelessWidget {
   const SafeRideCard({
     required this.title,
@@ -16,6 +18,13 @@ class SafeRideCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => const SafeRide(),
+            ),
+          );
+        },
         title: Text(
           title,
           style: const TextStyle(fontSize: 30),
