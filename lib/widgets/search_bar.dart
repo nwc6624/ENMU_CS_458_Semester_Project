@@ -3,8 +3,7 @@ import 'package:enmu_mobile/modules/scrape_enmu.dart'; // Correct import for the
 import 'package:webview_flutter/webview_flutter.dart'; // Import for WebView
 
 class SearchTextField extends StatelessWidget {
-  SearchTextField({Key? key, required this.scaffoldKey})
-      : super(key: key);
+  SearchTextField({Key? key, required this.scaffoldKey}) : super(key: key);
 
   final GlobalKey<ScaffoldState> scaffoldKey;
 
@@ -47,7 +46,8 @@ class SearchTextField extends StatelessWidget {
                               'Read more',
                               style: TextStyle(color: Colors.green),
                             ),
-                            onTap: () => _launchURL(context, result['url'] ?? ''),
+                            onTap: () =>
+                                _launchURL(context, result['url'] ?? ''),
                           ),
                           const SizedBox(height: 10),
                         ],
@@ -109,6 +109,7 @@ class SearchTextField extends StatelessWidget {
     }
   }
 
+  bool isTextFieldFocused = true;
 
   @override
   Widget build(BuildContext context) {
@@ -118,23 +119,41 @@ class SearchTextField extends StatelessWidget {
           controller: _controller,
           maxLength: 50,
           minLines: 1,
-          maxLines: 3,
           decoration: InputDecoration(
+            suffixIcon: IconButton(
+              color: isTextFieldFocused
+                  ? Theme.of(context).colorScheme.secondary
+                  : Theme.of(context).colorScheme.primary,
+              iconSize: 26,
+              onPressed: () => _performSearch(context),
+              icon: const Icon(Icons.arrow_forward),
+            ),
             contentPadding: const EdgeInsets.all(15),
             hintText: 'Search ENMU:',
             hintStyle: const TextStyle(fontSize: 18),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(35.0),
+              borderSide: BorderSide(
+                color: Theme.of(context).colorScheme.secondary,
+                width: 1.5,
+              ),
+            ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(35.0),
+              borderSide: BorderSide(
+                color: Theme.of(context).colorScheme.secondary,
+                width: 1.5,
+              ),
             ),
           ),
           autocorrect: true,
           enableSuggestions: true,
           onSubmitted: (_) => _performSearch(context),
         ),
-        ElevatedButton(
-          onPressed: () => _performSearch(context),
-          child: const Text('Search'),
-        ),
+        // ElevatedButton(
+        //   onPressed: () => _performSearch(context),
+        //   child: const Text('Search'),
+        // ),
       ],
     );
   }
@@ -148,7 +167,8 @@ class WebViewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("ENMUmobile"),
+      appBar: AppBar(
+        title: const Text("ENMUmobile"),
       ),
       body: WebView(
         initialUrl: url,
