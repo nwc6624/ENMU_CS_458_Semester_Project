@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:url_launcher/url_launcher.dart';
+
 class EmergencyCard extends StatelessWidget {
   const EmergencyCard({
     required this.title,
@@ -9,6 +11,15 @@ class EmergencyCard extends StatelessWidget {
 
   final String title;
   final Icon icon;
+
+  void _makePhoneCall(String phoneNumber) async {
+    final Uri phoneCall = Uri(scheme: 'tel', path: phoneNumber);
+    if (await canLaunchUrl(phoneCall)) {
+      await launchUrl(phoneCall);
+    } else {
+      throw 'Could not call $phoneCall';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +48,7 @@ class EmergencyCard extends StatelessWidget {
                     ),
                     child: const Text('Call'),
                     onPressed: () {
-                      Navigator.of(dialogContext).pop(); // Dismiss alert dialog
+                      _makePhoneCall('5755622392'); // Call ENMU campus police
                     },
                   ),
                   TextButton(
