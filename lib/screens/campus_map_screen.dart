@@ -149,11 +149,11 @@ class _CampusMapScreenState extends State<CampusMapScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton(
-                  onPressed: () => navigateToFullScreenImage(context, 'assets/images/campus-map-whole.pdf'),
+                  onPressed: () => navigateToFullScreenImage(context, 'assets/pdfs/campus-map-whole.pdf'),
                   child: const Text('Full Map'),
                 ),
                 ElevatedButton(
-                  onPressed: () => navigateToFullScreenImage(context, 'assets/images/campus-map-northwest-us70.pdf'),
+                  onPressed: () => navigateToFullScreenImage(context, 'assets/pdfs/campus-map-northwest-us70.pdf'),
                   child: const Text('NW HWY 70'),
                 ),
                 ElevatedButton(

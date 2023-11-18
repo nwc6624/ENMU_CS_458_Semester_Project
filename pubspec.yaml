@@ -30,6 +30,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/pdfs/
 #    - safe-ride-logo.png
 #    - assets/images/campus-map-whole.pdf
 #    - assets/images/campus-map-northwest-us70.pdf

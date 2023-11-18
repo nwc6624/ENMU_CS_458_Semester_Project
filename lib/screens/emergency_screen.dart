@@ -16,10 +16,12 @@ class EmergencyScreen extends StatelessWidget {
           children: [
             Expanded(
               flex: 3,
-              child: Column(crossAxisAlignment: CrossAxisAlignment.center,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Column(crossAxisAlignment: CrossAxisAlignment.center,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const Text('Non-Emergency Police Issues:'),
                       ElevatedButton(
@@ -30,7 +32,8 @@ class EmergencyScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Column(crossAxisAlignment: CrossAxisAlignment.center,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const Text('After Hours/Weekends/ Holidays:'),
                       ElevatedButton(
@@ -52,7 +55,8 @@ class EmergencyScreen extends StatelessWidget {
             ),
             const Expanded(
               flex: 2,
-              child: Column(crossAxisAlignment: CrossAxisAlignment.center,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Card(
