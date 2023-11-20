@@ -31,8 +31,4 @@ flutter:
   assets:
     - assets/images/
     - assets/pdfs/
-#    - safe-ride-logo.png
-#    - assets/images/campus-map-whole.pdf
-#    - assets/images/campus-map-northwest-us70.pdf
-#    - assets/images/campus-map-southeast-of-us70.pdf
 

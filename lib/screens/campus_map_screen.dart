@@ -4,7 +4,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
-import 'show_map_image.dart'; // Ensure this is the correct path to your file
+import 'show_map_image.dart';
 
 class CampusMapScreen extends StatefulWidget {
   const CampusMapScreen({super.key});
@@ -49,16 +49,6 @@ class _CampusMapScreenState extends State<CampusMapScreen> {
     await Future.delayed(const Duration(seconds: 2));
     return true; // Replace with actual map loading logic
   }
-
-  // void _navigateToFullScreenImage(BuildContext context, String pdfPath) {
-  //   Navigator.push(
-  //     context,
-  //     MaterialPageRoute(
-  //       builder: (context) =>
-  //           MapImage(pdfPath: pdfPath), // Make sure MapImage is a defined class
-  //     ),
-  //   );
-  // }
 
   Future<void> _launchMapsUrl() async {
     const double latitude = 34.186192;
@@ -159,7 +149,6 @@ class _CampusMapScreenState extends State<CampusMapScreen> {
               urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
               subdomains: const ['a', 'b', 'c'],
             ),
-            // Additional layers can be added here
           ],
         ),
         Align(
@@ -167,43 +156,15 @@ class _CampusMapScreenState extends State<CampusMapScreen> {
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: FloatingActionButton(
+              foregroundColor: Theme.of(context).colorScheme.onSecondaryContainer,
+              backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
               onPressed: () {
-                _launchMapsUrl();
+                // _launchMapsUrl();
               },
               child: const Icon(Icons.navigation_outlined),
             ),
           ),
         )
-        // Align(
-        //   alignment: Alignment.bottomCenter,
-        //   child: SingleChildScrollView(
-        //     scrollDirection: Axis.horizontal,
-        //     child: Row(
-        //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        //       children: [
-        //         ElevatedButton(
-        //           onPressed: () => _navigateToFullScreenImage(
-        //               context, 'assets/pdfs/campus-map-whole.pdf'),
-        //           child: const Text('Full Map'),
-        //         ),
-        //         ElevatedButton(
-        //           onPressed: () => _navigateToFullScreenImage(
-        //               context, 'assets/pdfs/campus-map-northwest-us70.pdf'),
-        //           child: const Text('NW HWY 70'),
-        //         ),
-        //         ElevatedButton(
-        //           onPressed: () => _navigateToFullScreenImage(
-        //               context, 'assets/pdfs/campus-map-southeast-of-us70.pdf'),
-        //           child: const Text('SW HWY 70'),
-        //         ),
-        //         ElevatedButton(
-        //           onPressed: _launchMapsUrl,
-        //           child: const Text('Open Maps'),
-        //         ),
-        //       ],
-        //     ),
-        //   ),
-        // ),
       ],
     );
   }

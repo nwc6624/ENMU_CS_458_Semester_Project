@@ -1,7 +1,22 @@
+import 'package:enmu_mobile/screens/show_map_image.dart';
 import 'package:flutter/material.dart';
 
-class EmergencyScreen extends StatelessWidget {
+class EmergencyScreen extends StatefulWidget {
   const EmergencyScreen({super.key});
+
+  @override
+  State<EmergencyScreen> createState() => _EmergencyScreenState();
+}
+
+class _EmergencyScreenState extends State<EmergencyScreen> {
+  Widget showPDF(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Emergency Survival Guide'),
+      ),
+      body: const MapImage(pdfPath: 'assets/pdfs/emergency-survival-guide.pdf'),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +60,16 @@ class EmergencyScreen extends StatelessWidget {
                     ],
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => showPDF(context),
+                        ),
+                      );
+                      // SfPdfViewer.asset(
+                      //     'assets/pdfs/emergency-survival-guide.pdf');
+                    },
                     child: const Text(
                       'View Emergency Survival Guide',
                     ),
