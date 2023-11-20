@@ -50,15 +50,15 @@ class _CampusMapScreenState extends State<CampusMapScreen> {
     return true; // Replace with actual map loading logic
   }
 
-  void _navigateToFullScreenImage(BuildContext context, String pdfPath) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) =>
-            MapImage(pdfPath: pdfPath), // Make sure MapImage is a defined class
-      ),
-    );
-  }
+  // void _navigateToFullScreenImage(BuildContext context, String pdfPath) {
+  //   Navigator.push(
+  //     context,
+  //     MaterialPageRoute(
+  //       builder: (context) =>
+  //           MapImage(pdfPath: pdfPath), // Make sure MapImage is a defined class
+  //     ),
+  //   );
+  // }
 
   Future<void> _launchMapsUrl() async {
     const double latitude = 34.186192;
@@ -111,28 +111,36 @@ class _CampusMapScreenState extends State<CampusMapScreen> {
             ],
           ),
         ),
-        body: FutureBuilder<bool>(
-          future: _loadMap(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            } else if (snapshot.hasError || !snapshot.data!) {
-              // Map failed to load
-              return Center(
-                child: IconButton(
-                  icon: const Icon(Icons.refresh),
-                  onPressed: () {
-                    // Refresh the state to attempt reloading the map
-                    setState(() => _loadMap());
-                  },
-                  tooltip: 'Reload Map',
-                ),
-              );
-            }
-
-            // Map loaded successfully
-            return buildMap(context);
-          },
+        body: TabBarView(
+          children: [
+            FutureBuilder<bool>(
+              future: _loadMap(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError || !snapshot.data!) {
+                  // Map failed to load
+                  return Center(
+                    child: IconButton(
+                      icon: const Icon(Icons.refresh),
+                      onPressed: () {
+                        // Refresh the state to attempt reloading the map
+                        setState(() => _loadMap());
+                      },
+                      tooltip: 'Reload Map',
+                    ),
+                  );
+                }
+                // Map loaded successfully
+                return buildMap(context);
+              },
+            ),
+            const MapImage(pdfPath: 'assets/pdfs/campus-map-whole.pdf'),
+            const MapImage(
+                pdfPath: 'assets/pdfs/campus-map-northwest-us70.pdf'),
+            const MapImage(
+                pdfPath: 'assets/pdfs/campus-map-southeast-of-us70.pdf'),
+          ],
         ),
       ),
     );
@@ -155,35 +163,47 @@ class _CampusMapScreenState extends State<CampusMapScreen> {
           ],
         ),
         Align(
-          alignment: Alignment.bottomCenter,
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
-                  onPressed: () => _navigateToFullScreenImage(
-                      context, 'assets/pdfs/campus-map-whole.pdf'),
-                  child: const Text('Full Map'),
-                ),
-                ElevatedButton(
-                  onPressed: () => _navigateToFullScreenImage(
-                      context, 'assets/pdfs/campus-map-northwest-us70.pdf'),
-                  child: const Text('NW HWY 70'),
-                ),
-                ElevatedButton(
-                  onPressed: () => _navigateToFullScreenImage(
-                      context, 'assets/pdfs/campus-map-southeast-of-us70.pdf'),
-                  child: const Text('SW HWY 70'),
-                ),
-                ElevatedButton(
-                  onPressed: _launchMapsUrl,
-                  child: const Text('Open Maps'),
-                ),
-              ],
+          alignment: Alignment.bottomRight,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: FloatingActionButton(
+              onPressed: () {
+                _launchMapsUrl();
+              },
+              child: const Icon(Icons.navigation_outlined),
             ),
           ),
-        ),
+        )
+        // Align(
+        //   alignment: Alignment.bottomCenter,
+        //   child: SingleChildScrollView(
+        //     scrollDirection: Axis.horizontal,
+        //     child: Row(
+        //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        //       children: [
+        //         ElevatedButton(
+        //           onPressed: () => _navigateToFullScreenImage(
+        //               context, 'assets/pdfs/campus-map-whole.pdf'),
+        //           child: const Text('Full Map'),
+        //         ),
+        //         ElevatedButton(
+        //           onPressed: () => _navigateToFullScreenImage(
+        //               context, 'assets/pdfs/campus-map-northwest-us70.pdf'),
+        //           child: const Text('NW HWY 70'),
+        //         ),
+        //         ElevatedButton(
+        //           onPressed: () => _navigateToFullScreenImage(
+        //               context, 'assets/pdfs/campus-map-southeast-of-us70.pdf'),
+        //           child: const Text('SW HWY 70'),
+        //         ),
+        //         ElevatedButton(
+        //           onPressed: _launchMapsUrl,
+        //           child: const Text('Open Maps'),
+        //         ),
+        //       ],
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }
