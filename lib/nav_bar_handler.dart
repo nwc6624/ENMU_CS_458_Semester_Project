@@ -10,6 +10,7 @@ class NavBarHandler extends StatefulWidget {
 
   // static const String route = '/';
 
+
   @override
   State<NavBarHandler> createState() => _NavBarHandlerState();
 }
@@ -17,8 +18,8 @@ class NavBarHandler extends StatefulWidget {
 class _NavBarHandlerState extends State<NavBarHandler> {
   int _navBarIndex = 0;
 
-  final _buildBody = const <Widget>[
-    MyHomePage(),
+  final _buildBody = <Widget>[
+    MyHomePage(/*bottomPadding: bottomPadding,*/),
     CampusMapScreen(),
     SportsScreen(),
     DirectoryScreen(),
@@ -51,11 +52,9 @@ class _NavBarHandlerState extends State<NavBarHandler> {
 
   @override
   Widget build(BuildContext context) {
+    // bottomPadding = MediaQuery.of(context).padding.bottom;
+    // print(bottomPadding);
     return Scaffold(resizeToAvoidBottomInset: false,
-      // appBar: AppBar(
-      //   title: const Text('ENMUmobile',
-      //   ),
-      // ),
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Theme.of(context).colorScheme.primary,
         unselectedItemColor: Theme.of(context).colorScheme.secondary,
