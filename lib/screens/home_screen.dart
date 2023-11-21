@@ -4,7 +4,6 @@ import '../widgets/emergency_card.dart';
 import '../widgets/holiday_card.dart';
 import '../widgets/saferide_card.dart';
 import '../widgets/search_bar.dart';
-import 'safe_ride_screen.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -51,31 +50,24 @@ class _MyHomePageState extends State<MyHomePage> {
                     scaffoldKey: _scaffoldKey,
                   ),
                 ),
-                Expanded(
+                const Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => const SafeRide()));
-                        },
-                        child: const SafeRideCard(
-                          title: 'SafeRide',
-                          date: 'Thursday-Sunday',
-                          time: '8am-12am',
-                        ),
+                      SafeRideCard(
+                        title: 'SafeRide',
+                        date: 'Thursday-Sunday',
+                        time: '8am-12am',
                       ),
-                      const SizedBox(height: 4),
-                      const EmergencyCard(
-                        title: 'Emergency',
-                        icon: Icons.local_police,
+                      SizedBox(height: 4),
+                      EmergencyCard(
+                        title: 'ENMU Police',
+                        icon: Icon(Icons.local_police),
                       ),
-                      const SizedBox(height: 4),
-                      const HolidayCard(
+                      SizedBox(height: 4),
+                      HolidayCard(
                         title: 'Next School Holiday',
                       ),
-                      // Add more widgets if needed
                     ],
                   ),
                 ),

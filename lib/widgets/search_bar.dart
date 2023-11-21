@@ -15,7 +15,7 @@ class SearchTextField extends StatefulWidget {
 class _SearchTextFieldState extends State<SearchTextField> {
   final TextEditingController _controller = TextEditingController();
 
-  Future<void> _performSearch() async {
+  Future<void> _performSearch(BuildContext context) async {
     // Dismiss the keyboard
     FocusScope.of(context).unfocus();
 
@@ -52,7 +52,8 @@ class _SearchTextFieldState extends State<SearchTextField> {
                               'Read more',
                               style: TextStyle(color: Colors.green),
                             ),
-                            onTap: () => _launchURL(result['url'] ?? ''),
+                            onTap: () =>
+                                _launchURL(context, result['url'] ?? ''),
                           ),
                           const SizedBox(height: 10),
                         ],
@@ -83,7 +84,7 @@ class _SearchTextFieldState extends State<SearchTextField> {
     }
   }
 
-  void _launchURL(String urlString) {
+  void _launchURL(BuildContext context, String urlString) {
     final Uri url = Uri.parse(urlString);
     Navigator.of(context).push(
       MaterialPageRoute(
@@ -114,31 +115,68 @@ class _SearchTextFieldState extends State<SearchTextField> {
     }
   }
 
+  late FocusNode searchBarFocus;
+
+  @override
+  void initState() {
+    super.initState();
+    searchBarFocus = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    searchBarFocus.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         TextField(
+          focusNode: searchBarFocus,
           controller: _controller,
           maxLength: 50,
           minLines: 1,
-          maxLines: 3,
           decoration: InputDecoration(
+            suffixIconColor: searchBarFocus.hasFocus
+                ? Theme.of(context).colorScheme.primary
+                : Theme.of(context).colorScheme.secondary,
+            suffixIcon: IconButton(
+              tooltip: "Submit Query",
+              color: searchBarFocus.hasFocus
+                  ? Theme.of(context).colorScheme.primary
+                  : Theme.of(context).colorScheme.secondary,
+              iconSize: 26,
+              onPressed: () => _performSearch(context),
+              icon: const Icon(Icons.arrow_forward),
+            ),
             contentPadding: const EdgeInsets.all(15),
             hintText: 'Search ENMU:',
             hintStyle: const TextStyle(fontSize: 18),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(35.0),
+              borderSide: BorderSide(
+                color: Theme.of(context).colorScheme.secondary,
+                width: 1.5,
+              ),
+            ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(35.0),
+              borderSide: BorderSide(
+                color: Theme.of(context).colorScheme.secondary,
+                width: 1.5,
+              ),
             ),
           ),
           autocorrect: true,
           enableSuggestions: true,
-          onSubmitted: (_) => _performSearch(),
+          onSubmitted: (_) => _performSearch(context),
         ),
-        ElevatedButton(
-          onPressed: () => _performSearch(),
-          child: const Text('Search'),
-        ),
+        // ElevatedButton(
+        //   onPressed: () => _performSearch(context),
+        //   child: const Text('Search'),
+        // ),
       ],
     );
   }
@@ -152,7 +190,8 @@ class WebViewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("ENMUmobile"),
+      appBar: AppBar(
+        title: const Text("ENMUmobile"),
       ),
       body: WebView(
         initialUrl: url,
