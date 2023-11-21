@@ -156,7 +156,8 @@ class _CampusMapScreenState extends State<CampusMapScreen> {
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: FloatingActionButton(
-              foregroundColor: Theme.of(context).colorScheme.onSecondaryContainer,
+              foregroundColor:
+                  Theme.of(context).colorScheme.onSecondaryContainer,
               backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
               onPressed: () {
                 // _launchMapsUrl();
