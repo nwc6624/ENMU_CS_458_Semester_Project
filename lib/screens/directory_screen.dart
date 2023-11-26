@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import '../modules/enmu_directory_api.dart'; // Ensure this path is correct for your project
+import '../models/enmu_directory_api.dart'; // Ensure this path is correct for your project
 
 class DirectoryScreen extends StatefulWidget {
   const DirectoryScreen({Key? key}) : super(key: key);

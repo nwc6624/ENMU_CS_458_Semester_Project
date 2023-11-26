@@ -4,12 +4,14 @@ import '../widgets/emergency_card.dart';
 import '../widgets/holiday_card.dart';
 import '../widgets/saferide_card.dart';
 import '../widgets/search_bar.dart';
+// import '../models/bottom_nav_height.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, /*required this.bottomPadding*/});
+  const MyHomePage({super.key});
 
   // final double bottomPadding;
   final screenWidgetsHeight = 385;
+
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -18,20 +20,30 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
+  // BottomNavHeightWithSafeArea safeAreaBottom = BottomNavHeightWithSafeArea();
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  // }
+
+
   @override
   Widget build(BuildContext context) {
     final appBarHeight = AppBar().preferredSize.height;
     final safeAreaTop = MediaQuery.of(context).padding.top;
-    final safeAreaBottom = MediaQuery.of(context).padding.bottom;
+    // final safeAreaBottom = MediaQuery.of(context).padding.bottom;
     final maxScreenHeight = MediaQuery.of(context).size.height;
+    // double? bottom = safeAreaBottom?.getBottomSafeAreaPadding;
+
 
     final availableScreenHeight = maxScreenHeight -
         (appBarHeight +
             safeAreaTop +
-            safeAreaBottom +
-            kBottomNavigationBarHeight
-            // 2
+            // bottom! +
+            kBottomNavigationBarHeight+2
         );
+    // print(bottom);
     print('height = $availableScreenHeight');
 
     return GestureDetector(
@@ -82,7 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   child: Column(
                                     children: [
                                       SafeRideCard(
-                                        title: 'SafeRide',
+                                        title: 'Safe Ride',
                                         date: 'Thursday-Sunday',
                                         time: '8am-12am',
                                       ),

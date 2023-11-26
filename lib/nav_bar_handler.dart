@@ -19,10 +19,10 @@ class _NavBarHandlerState extends State<NavBarHandler> {
   int _navBarIndex = 0;
 
   final _buildBody = <Widget>[
-    MyHomePage(/*bottomPadding: bottomPadding,*/),
-    CampusMapScreen(),
-    SportsScreen(),
-    DirectoryScreen(),
+    const MyHomePage(),
+    const CampusMapScreen(),
+    const SportsScreen(),
+    const DirectoryScreen(),
   ];
 
   final List<BottomNavigationBarItem> _navBarItems = [
@@ -50,10 +50,22 @@ class _NavBarHandlerState extends State<NavBarHandler> {
     });
   }
 
+  // late BottomNavHeightWithSafeArea bottomSafeArea;
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   final double bottomPadding = MediaQuery.of(context).padding.bottom;
+  //   bottomSafeArea = BottomNavHeightWithSafeArea(bottomSafeAreaPadding: bottomPadding);
+  // }
+
+
   @override
   Widget build(BuildContext context) {
-    // bottomPadding = MediaQuery.of(context).padding.bottom;
-    // print(bottomPadding);
+   // final double bottomPadding = MediaQuery.of(context).padding.bottom;
+   // bottomSafeArea = BottomNavHeightWithSafeArea(bottomSafeAreaPadding: bottomPadding);
+   //
+   //  print(bottomSafeArea.getBottomSafeAreaPadding);
     return Scaffold(resizeToAvoidBottomInset: false,
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Theme.of(context).colorScheme.primary,
