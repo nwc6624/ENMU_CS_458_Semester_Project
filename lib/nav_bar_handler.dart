@@ -10,7 +10,6 @@ class NavBarHandler extends StatefulWidget {
 
   // static const String route = '/';
 
-
   @override
   State<NavBarHandler> createState() => _NavBarHandlerState();
 }
@@ -25,20 +24,21 @@ class _NavBarHandlerState extends State<NavBarHandler> {
     const DirectoryScreen(),
   ];
 
-  final List<BottomNavigationBarItem> _navBarItems = [
-    const BottomNavigationBarItem(
+  final List<Widget> _navBarItems = [
+    const NavigationDestination(
+      // selectedIcon: ,
       icon: Icon(Icons.home),
       label: 'Home',
     ),
-    const BottomNavigationBarItem(
+    const NavigationDestination(
       icon: Icon(Icons.map),
       label: 'Map',
     ),
-    const BottomNavigationBarItem(
+    const NavigationDestination(
       icon: Icon(Icons.sports_baseball),
       label: 'Sports',
     ),
-    const BottomNavigationBarItem(
+    const NavigationDestination(
       icon: Icon(Icons.store_mall_directory),
       label: 'Directory',
     ),
@@ -59,25 +59,23 @@ class _NavBarHandlerState extends State<NavBarHandler> {
   //   bottomSafeArea = BottomNavHeightWithSafeArea(bottomSafeAreaPadding: bottomPadding);
   // }
 
-
   @override
   Widget build(BuildContext context) {
-   // final double bottomPadding = MediaQuery.of(context).padding.bottom;
-   // bottomSafeArea = BottomNavHeightWithSafeArea(bottomSafeAreaPadding: bottomPadding);
-   //
-   //  print(bottomSafeArea.getBottomSafeAreaPadding);
-    return Scaffold(resizeToAvoidBottomInset: false,
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Theme.of(context).colorScheme.primary,
-        unselectedItemColor: Theme.of(context).colorScheme.secondary,
-        currentIndex: _navBarIndex,
-        items: _navBarItems,
-        onTap: _navItemTapped,
+    // final double bottomPadding = MediaQuery.of(context).padding.bottom;
+    // bottomSafeArea = BottomNavHeightWithSafeArea(bottomSafeAreaPadding: bottomPadding);
+    //
+    //  print(bottomSafeArea.getBottomSafeAreaPadding);
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      bottomNavigationBar: NavigationBar(
+        labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+        destinations: _navBarItems,
+        onDestinationSelected: _navItemTapped,
+        // selectedItemColor: Theme.of(context).colorScheme.primary,
+        // unselectedItemColor: Theme.of(context).colorScheme.secondary,
+        selectedIndex: _navBarIndex,
       ),
-      body: IndexedStack(
-        index: _navBarIndex,
-        children: _buildBody,
-      ),
+      body: _buildBody[_navBarIndex],
     );
   }
 }
