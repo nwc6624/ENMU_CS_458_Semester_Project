@@ -50,24 +50,18 @@ class _NavBarHandlerState extends State<NavBarHandler> {
 
   @override
   Widget build(BuildContext context) {
-    // final double bottomPadding = MediaQuery.of(context).padding.bottom;
-    // bottomSafeArea = BottomNavHeightWithSafeArea(bottomSafeAreaPadding: bottomPadding);
-    //  print('safeAreaBottom1: $bottomPadding');
     return Scaffold(
       resizeToAvoidBottomInset: false,
       bottomNavigationBar: NavigationBar(
         labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
         destinations: _navBarItems,
         onDestinationSelected: _navItemTapped,
-        // selectedItemColor: Theme.of(context).colorScheme.primary,
-        // unselectedItemColor: Theme.of(context).colorScheme.secondary,
         selectedIndex: _navBarIndex,
       ),
-      body: IndexedStack(
+      body: IndexedStack(   // _buildBody[_navBarIndex], the alternative
         index: _navBarIndex,
         children: _buildBody,
       ),
-      // _buildBody[_navBarIndex],
     );
   }
 }

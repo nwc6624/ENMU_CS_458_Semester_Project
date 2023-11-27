@@ -9,7 +9,6 @@ import '../widgets/search_bar.dart';
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
 
-  // final double bottomPadding;
   final screenWidgetsHeight = 385;
 
   @override
