@@ -31,8 +31,8 @@ class _MyHomePageState extends State<MyHomePage> {
             safeAreaBottom +
             kBottomNavigationBarHeight +
             2);
-    print('safeAreaBottom: $safeAreaBottom');
-    print('height = $availableScreenHeight');
+    // print('safeAreaBottom: $safeAreaBottom');
+    // print('height = $availableScreenHeight');
 
     return GestureDetector(
       onTap: () {
