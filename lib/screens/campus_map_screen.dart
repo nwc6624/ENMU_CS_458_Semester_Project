@@ -101,36 +101,38 @@ class _CampusMapScreenState extends State<CampusMapScreen> {
             ],
           ),
         ),
-        body: TabBarView(
-          children: [
-            FutureBuilder<bool>(
-              future: _loadMap(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (snapshot.hasError || !snapshot.data!) {
-                  // Map failed to load
-                  return Center(
-                    child: IconButton(
-                      icon: const Icon(Icons.refresh),
-                      onPressed: () {
-                        // Refresh the state to attempt reloading the map
-                        setState(() => _loadMap());
-                      },
-                      tooltip: 'Reload Map',
-                    ),
-                  );
-                }
-                // Map loaded successfully
-                return buildMap(context);
-              },
-            ),
-            const MapImage(pdfPath: 'assets/pdfs/campus-map-whole.pdf'),
-            const MapImage(
-                pdfPath: 'assets/pdfs/campus-map-northwest-us70.pdf'),
-            const MapImage(
-                pdfPath: 'assets/pdfs/campus-map-southeast-of-us70.pdf'),
-          ],
+        body: SafeArea(
+          child: TabBarView(
+            children: [
+              FutureBuilder<bool>(
+                future: _loadMap(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasError || !snapshot.data!) {
+                    // Map failed to load
+                    return Center(
+                      child: IconButton(
+                        icon: const Icon(Icons.refresh),
+                        onPressed: () {
+                          // Refresh the state to attempt reloading the map
+                          setState(() => _loadMap());
+                        },
+                        tooltip: 'Reload Map',
+                      ),
+                    );
+                  }
+                  // Map loaded successfully
+                  return buildMap(context);
+                },
+              ),
+              const MapImage(pdfPath: 'assets/pdfs/campus-map-whole.pdf'),
+              const MapImage(
+                  pdfPath: 'assets/pdfs/campus-map-northwest-us70.pdf'),
+              const MapImage(
+                  pdfPath: 'assets/pdfs/campus-map-southeast-of-us70.pdf'),
+            ],
+          ),
         ),
       ),
     );

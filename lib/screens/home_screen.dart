@@ -95,6 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                       HolidayCard(
                                         title: 'Next School Holiday',
                                       ),
+                                      SizedBox(height: 8),
                                     ],
                                   ),
                                 ),
