@@ -63,7 +63,11 @@ class _NavBarHandlerState extends State<NavBarHandler> {
         // unselectedItemColor: Theme.of(context).colorScheme.secondary,
         selectedIndex: _navBarIndex,
       ),
-      body: _buildBody[_navBarIndex],
+      body: IndexedStack(
+        index: _navBarIndex,
+        children: _buildBody,
+      ),
+      // _buildBody[_navBarIndex],
     );
   }
 }
