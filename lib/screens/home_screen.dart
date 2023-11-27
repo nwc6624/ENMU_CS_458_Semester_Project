@@ -12,7 +12,6 @@ class MyHomePage extends StatefulWidget {
   // final double bottomPadding;
   final screenWidgetsHeight = 385;
 
-
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
@@ -27,23 +26,21 @@ class _MyHomePageState extends State<MyHomePage> {
   //   super.initState();
   // }
 
-
   @override
   Widget build(BuildContext context) {
     final appBarHeight = AppBar().preferredSize.height;
     final safeAreaTop = MediaQuery.of(context).padding.top;
-    // final safeAreaBottom = MediaQuery.of(context).padding.bottom;
+    final safeAreaBottom = MediaQuery.of(context).padding.bottom;
     final maxScreenHeight = MediaQuery.of(context).size.height;
     // double? bottom = safeAreaBottom?.getBottomSafeAreaPadding;
-
 
     final availableScreenHeight = maxScreenHeight -
         (appBarHeight +
             safeAreaTop +
-            // bottom! +
-            kBottomNavigationBarHeight+2
-        );
-    // print(bottom);
+            safeAreaBottom +
+            kBottomNavigationBarHeight +
+            2);
+    print('safeAreaBottom: $safeAreaBottom');
     print('height = $availableScreenHeight');
 
     return GestureDetector(
@@ -146,6 +143,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                         HolidayCard(
                                           title: 'Next School Holiday',
                                         ),
+                                        SizedBox(height: 8),
                                       ],
                                     ),
                                   ),
@@ -154,10 +152,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                     )
                   : Padding(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 25,
-                        horizontal: 10,
-                      ),
+                      padding: const EdgeInsets.fromLTRB(10, 25, 10, 8),
                       child: Column(
                         children: [
                           Padding(

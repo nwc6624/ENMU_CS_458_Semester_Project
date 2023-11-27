@@ -64,7 +64,7 @@ class _NavBarHandlerState extends State<NavBarHandler> {
     // final double bottomPadding = MediaQuery.of(context).padding.bottom;
     // bottomSafeArea = BottomNavHeightWithSafeArea(bottomSafeAreaPadding: bottomPadding);
     //
-    //  print(bottomSafeArea.getBottomSafeAreaPadding);
+    //  print('safeAreaBottom1: $bottomPadding');
     return Scaffold(
       resizeToAvoidBottomInset: false,
       bottomNavigationBar: NavigationBar(
