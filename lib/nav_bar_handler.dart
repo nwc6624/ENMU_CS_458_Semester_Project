@@ -8,8 +8,6 @@ import 'package:enmu_mobile/screens/sports_screen.dart';
 class NavBarHandler extends StatefulWidget {
   const NavBarHandler({super.key});
 
-  // static const String route = '/';
-
   @override
   State<NavBarHandler> createState() => _NavBarHandlerState();
 }
@@ -50,20 +48,10 @@ class _NavBarHandlerState extends State<NavBarHandler> {
     });
   }
 
-  // late BottomNavHeightWithSafeArea bottomSafeArea;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   final double bottomPadding = MediaQuery.of(context).padding.bottom;
-  //   bottomSafeArea = BottomNavHeightWithSafeArea(bottomSafeAreaPadding: bottomPadding);
-  // }
-
   @override
   Widget build(BuildContext context) {
     // final double bottomPadding = MediaQuery.of(context).padding.bottom;
     // bottomSafeArea = BottomNavHeightWithSafeArea(bottomSafeAreaPadding: bottomPadding);
-    //
     //  print('safeAreaBottom1: $bottomPadding');
     return Scaffold(
       resizeToAvoidBottomInset: false,

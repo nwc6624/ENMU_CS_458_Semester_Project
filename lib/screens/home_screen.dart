@@ -19,20 +19,12 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  // BottomNavHeightWithSafeArea safeAreaBottom = BottomNavHeightWithSafeArea();
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  // }
-
   @override
   Widget build(BuildContext context) {
     final appBarHeight = AppBar().preferredSize.height;
     final safeAreaTop = MediaQuery.of(context).padding.top;
     final safeAreaBottom = MediaQuery.of(context).padding.bottom;
     final maxScreenHeight = MediaQuery.of(context).size.height;
-    // double? bottom = safeAreaBottom?.getBottomSafeAreaPadding;
 
     final availableScreenHeight = maxScreenHeight -
         (appBarHeight +
