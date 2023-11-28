@@ -33,11 +33,11 @@ class _MyHomePageState extends State<MyHomePage> {
             kBottomNavigationBarHeight +
             2);
     // print('safeAreaBottom: $safeAreaBottom');
-    print('availableHeight = $availableScreenHeight');
-    print('maxScreen: $maxScreenHeight');
-    print('safeAreaTop: $safeAreaTop');
-    print('appBar: $appBarHeight');
-    print('widthScreen: $screenWidth');
+    // print('availableHeight = $availableScreenHeight');
+    // print('maxScreen: $maxScreenHeight');
+    // print('safeAreaTop: $safeAreaTop');
+    // print('appBar: $appBarHeight');
+    // print('widthScreen: $screenWidth');
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
