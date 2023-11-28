@@ -53,50 +53,52 @@ class _SportsScreenState extends State<SportsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:
-      AppBar(
-        title: const Text('ENMU Athletics'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.refresh),
-            onPressed: () {
-              setState(() {
-                _key = UniqueKey();
-                _isLoading = true;
-              });
-            },
-          ),
-        ],
-      ),
-      body: _isConnected
-          ? Stack(
-        children: [
-          WebView(
-            key: _key,
-            initialUrl: 'https://goeasternathletics.com/index.aspx',
-            javascriptMode: JavascriptMode.unrestricted,
-            onPageFinished: (String url) {
-              setState(() {
-                _isLoading = false;
-              });
-            },
-            onWebResourceError: (error) {
-              setState(() {
-                _isLoading = false;
-              });
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Failed to load page: ${error.description}')),
-              );
-            },
-          ),
-          _isLoading
-              ? const Center(child: CircularProgressIndicator())
-              : Container(),
-        ],
-      )
-          : const Center(
-        child: Text('No Internet Connection'),
-      ),
-    );
+        appBar: AppBar(
+          title: const Text('ENMU Athletics'),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.refresh),
+              onPressed: () {
+                setState(() {
+                  _key = UniqueKey();
+                  _isLoading = true;
+                });
+              },
+            ),
+          ],
+        ),
+        body: SafeArea(
+          child: _isConnected
+              ? Stack(
+                  children: [
+                    WebView(
+                      key: _key,
+                      initialUrl: 'https://goeasternathletics.com/index.aspx',
+                      javascriptMode: JavascriptMode.unrestricted,
+                      onPageFinished: (String url) {
+                        setState(() {
+                          _isLoading = false;
+                        });
+                      },
+                      onWebResourceError: (error) {
+                        setState(() {
+                          _isLoading = false;
+                        });
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                              content: Text(
+                                  'Failed to load page: ${error.description}')),
+                        );
+                      },
+                    ),
+                    _isLoading
+                        ? const Center(child: CircularProgressIndicator())
+                        : Container(),
+                  ],
+                )
+              : const Center(
+                  child: Text('No Internet Connection'),
+                ),
+        ));
   }
 }

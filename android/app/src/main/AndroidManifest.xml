@@ -1,8 +1,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="enmu_mobile"
+        android:label="ENMUmobile"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round">
+<!--        <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">-->
+<!--            <background android:drawable="@color/ic_launcher_background" />-->
+<!--            <foreground android:drawable="@mipmap/ic_launcher_foreground" />-->
+<!--        </adaptive-icon>-->
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -30,4 +35,5 @@
             android:name="flutterEmbedding"
             android:value="2" />
     </application>
+
 </manifest>

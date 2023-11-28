@@ -72,47 +72,49 @@ class _DirectoryScreenState extends State<DirectoryScreen> {
           ),
         ),
       ),
-      body: FutureBuilder<List<Map<String, String>>>(
-        future: directoriesFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else if (snapshot.hasData) {
-            final directories = snapshot.data!;
-            if (directories.isEmpty) {
-              return const Center(child: Text('No directories found.'));
+      body: SafeArea(
+        child: FutureBuilder<List<Map<String, String>>>(
+          future: directoriesFuture,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError) {
+              return Center(child: Text('Error: ${snapshot.error}'));
+            } else if (snapshot.hasData) {
+              final directories = snapshot.data!;
+              if (directories.isEmpty) {
+                return const Center(child: Text('No directories found.'));
+              } else {
+                return ListView.builder(
+                  itemCount: directories.length,
+                  itemBuilder: (context, index) {
+                    final directory = directories[index];
+                    return ListTile(
+                      title: Text(directory['title'] ?? 'No title'),
+                      subtitle: const Text('Read more'),
+                      onTap: () {
+                        final url = directory['url'];
+                        if (url != null) {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => WebViewScreen(url: url),
+                            ),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('URL not available')),
+                          );
+                        }
+                      },
+                    );
+                  },
+                );
+              }
             } else {
-              return ListView.builder(
-                itemCount: directories.length,
-                itemBuilder: (context, index) {
-                  final directory = directories[index];
-                  return ListTile(
-                    title: Text(directory['title'] ?? 'No title'),
-                    subtitle: const Text('Read more'),
-                    onTap: () {
-                      final url = directory['url'];
-                      if (url != null) {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => WebViewScreen(url: url),
-                          ),
-                        );
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('URL not available')),
-                        );
-                      }
-                    },
-                  );
-                },
-              );
+              return const Center(child: Text('Something went wrong.'));
             }
-          } else {
-            return const Center(child: Text('Something went wrong.'));
-          }
-        },
+          },
+        ),
       ),
     );
   }
