@@ -24,6 +24,7 @@ class _MyHomePageState extends State<MyHomePage> {
     final safeAreaTop = MediaQuery.of(context).padding.top;
     final safeAreaBottom = MediaQuery.of(context).padding.bottom;
     final maxScreenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
 
     final availableScreenHeight = maxScreenHeight -
         (appBarHeight +
@@ -32,8 +33,11 @@ class _MyHomePageState extends State<MyHomePage> {
             kBottomNavigationBarHeight +
             2);
     // print('safeAreaBottom: $safeAreaBottom');
-    // print('height = $availableScreenHeight');
-
+    print('availableHeight = $availableScreenHeight');
+    print('maxScreen: $maxScreenHeight');
+    print('safeAreaTop: $safeAreaTop');
+    print('appBar: $appBarHeight');
+    print('widthScreen: $screenWidth');
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -143,42 +147,83 @@ class _MyHomePageState extends State<MyHomePage> {
                               ),
                             ),
                     )
-                  : Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 25, 10, 8),
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 8.0,
-                            ),
-                            child: SearchTextField(
-                              scaffoldKey: _scaffoldKey,
-                            ),
-                          ),
-                          const Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                SafeRideCard(
-                                  title: 'SafeRide',
-                                  date: 'Thursday-Sunday',
-                                  time: '8am-12am',
+                  : availableScreenHeight >= 445 // Portrait Landscape
+                      ? Padding(
+                          padding: const EdgeInsets.fromLTRB(10, 25, 10, 8),
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8.0,
                                 ),
-                                SizedBox(height: 4),
-                                EmergencyCard(
+                                child: SearchTextField(
+                                  scaffoldKey: _scaffoldKey,
+                                ),
+                              ),
+                              Expanded(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    SafeRideCard(
+                                      title: 'Safe Ride',
+                                      date: screenWidth < 350
+                                          ? ''
+                                          : 'Thursday-Sunday',
+                                      time: screenWidth < 350 ? '' : '8am-12am',
+                                    ),
+                                    const SizedBox(height: 4),
+                                    const EmergencyCard(
+                                      title: 'ENMU Police',
+                                      icon: Icon(Icons.local_police),
+                                    ),
+                                    const SizedBox(height: 4),
+                                    const HolidayCard(
+                                      title: 'Next School Holiday',
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      : Padding(
+                          // Portrait Landscape
+                          padding: const EdgeInsets.fromLTRB(10, 25, 10, 8),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 8.0,
+                                  ),
+                                  child: SearchTextField(
+                                    scaffoldKey: _scaffoldKey,
+                                  ),
+                                ),
+                                Column(
+                                  children: [
+                                    SafeRideCard(
+                                      title: 'Safe Ride',
+                                      date: screenWidth < 350
+                                          ? 'Thr-Sun'
+                                          : 'Thursday-Sunday',
+                                      time: '8am-12am',
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 4),
+                                const EmergencyCard(
                                   title: 'ENMU Police',
                                   icon: Icon(Icons.local_police),
                                 ),
-                                SizedBox(height: 4),
-                                HolidayCard(
+                                const SizedBox(height: 4),
+                                const HolidayCard(
                                   title: 'Next School Holiday',
-                                ),
+                                )
                               ],
                             ),
                           ),
-                        ],
-                      ),
-                    );
+                        );
             },
           ),
         ),
