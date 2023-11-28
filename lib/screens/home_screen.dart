@@ -4,9 +4,12 @@ import '../widgets/emergency_card.dart';
 import '../widgets/holiday_card.dart';
 import '../widgets/saferide_card.dart';
 import '../widgets/search_bar.dart';
+// import '../models/bottom_nav_height.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
+
+  final screenWidgetsHeight = 385;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -18,18 +21,32 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final appBarHeight = AppBar().preferredSize.height;
-    // final navBarHeight = MediaQuery.of(context).padding.bottom;
-    final screenHeight = MediaQuery.of(context).size.height - appBarHeight - kBottomNavigationBarHeight;
-    print(screenHeight);
+    final safeAreaTop = MediaQuery.of(context).padding.top;
+    final safeAreaBottom = MediaQuery.of(context).padding.bottom;
+    final maxScreenHeight = MediaQuery.of(context).size.height;
+
+    final availableScreenHeight = maxScreenHeight -
+        (appBarHeight +
+            safeAreaTop +
+            safeAreaBottom +
+            kBottomNavigationBarHeight +
+            2);
+    // print('safeAreaBottom: $safeAreaBottom');
+    // print('height = $availableScreenHeight');
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
       },
       child: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           image: DecorationImage(
-            fit: BoxFit.fitWidth,
-            image: AssetImage("assets/images/SplashLogo4.png"),
+            fit: MediaQuery.of(context).orientation == Orientation.landscape
+                ? BoxFit.contain
+                : BoxFit.fitWidth,
+            image: const AssetImage(
+              "assets/images/SplashLogo4.png",
+            ),
           ),
         ),
         child: Scaffold(
@@ -43,29 +60,29 @@ class _MyHomePageState extends State<MyHomePage> {
             builder: (context, orientation) {
               return orientation == Orientation.landscape
                   ? SafeArea(
-                      top: false,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 25,
-                          horizontal: 10,
-                        ),
-                        child: screenHeight >= 300
-                            ? Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(8, 0, 8, 8),
-                                    child: SearchTextField(
-                                      scaffoldKey: _scaffoldKey,
-                                    ),
+                      child: availableScreenHeight >
+                              385 // This is the cumulative height of all home screen components
+                          ? Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 25,
+                                    horizontal: 25,
                                   ),
-                                  const Spacer(),
-                                  const Column(
+                                  child: SearchTextField(
+                                    scaffoldKey: _scaffoldKey,
+                                  ),
+                                ),
+                                const Spacer(),
+                                const Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 25,
+                                  ),
+                                  child: Column(
                                     children: [
                                       SafeRideCard(
-                                        title: 'SafeRide',
+                                        title: 'Safe Ride',
                                         date: 'Thursday-Sunday',
                                         time: '8am-12am',
                                       ),
@@ -80,21 +97,28 @@ class _MyHomePageState extends State<MyHomePage> {
                                       ),
                                     ],
                                   ),
-                                ],
-                              )
-                            : SingleChildScrollView(
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.fromLTRB(8, 0, 8, 8),
-                                      child: SearchTextField(
-                                        scaffoldKey: _scaffoldKey,
-                                      ),
+                                ),
+                              ],
+                            )
+                          : SingleChildScrollView(
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 25,
+                                      vertical: 25,
                                     ),
-                                    const Column(
+                                    child: SearchTextField(
+                                      scaffoldKey: _scaffoldKey,
+                                    ),
+                                  ),
+                                  const Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 25,
+                                    ),
+                                    child: Column(
                                       children: [
                                         SafeRideCard(
                                           title: 'SafeRide',
@@ -110,18 +134,16 @@ class _MyHomePageState extends State<MyHomePage> {
                                         HolidayCard(
                                           title: 'Next School Holiday',
                                         ),
+                                        SizedBox(height: 8),
                                       ],
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
-                      ),
+                            ),
                     )
                   : Padding(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 25,
-                        horizontal: 10,
-                      ),
+                      padding: const EdgeInsets.fromLTRB(10, 25, 10, 8),
                       child: Column(
                         children: [
                           Padding(

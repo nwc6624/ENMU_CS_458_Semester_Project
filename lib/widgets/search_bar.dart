@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:enmu_mobile/modules/scrape_enmu.dart'; // Correct import for the API folder
+import 'package:enmu_mobile/models/scrape_enmu.dart'; // Correct import for the API folder
 import 'package:webview_flutter/webview_flutter.dart'; // Import for WebView
 
 class SearchTextField extends StatefulWidget {
