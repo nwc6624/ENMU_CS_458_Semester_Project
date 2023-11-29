@@ -11,21 +11,26 @@ Future<List<Map<String, String>>> scrapeEnmuDirectories() async {
   if (response.statusCode == 200) {
     final document = parse(response.body);
     final results = <Map<String, String>>[];
-    // You might need to update the selector according to the structure of the new page
+    final seenTitles = <String>{};
+
+
     final elements = document.querySelectorAll('li[class*="item-"]');
 
     for (var element in elements) {
       final anchor = element.querySelector('a');
       if (anchor != null) {
         final title = anchor.text.trim();
-        final hrefValue = anchor.attributes['href']!;
-        final url = Uri.parse(hrefValue).isAbsolute ? hrefValue : Uri.parse(baseUrl).resolve(hrefValue).toString();
+        if (!seenTitles.contains(title)) {
+          seenTitles.add(title);
+          final hrefValue = anchor.attributes['href']!;
+          final url = Uri.parse(hrefValue).isAbsolute ? hrefValue : Uri.parse(baseUrl).resolve(hrefValue).toString();
 
-        final result = {
-          'title': title,
-          'url': url
-        };
-        results.add(result);
+          final result = {
+            'title': title,
+            'url': url
+          };
+          results.add(result);
+        }
       }
     }
     return results;
