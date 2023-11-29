@@ -17,6 +17,7 @@ class SafeRideCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 3,
       child: ListTile(
         onTap: () {
           Navigator.of(context).push(

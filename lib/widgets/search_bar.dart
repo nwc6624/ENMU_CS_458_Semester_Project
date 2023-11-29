@@ -75,9 +75,11 @@ class _SearchTextFieldState extends State<SearchTextField> {
           _controller.clear(); // Remove TextField content
         } else {
           _showErrorDialog('No results found.');
+          _controller.clear();
         }
       } catch (e) {
         _showErrorDialog('Failed to perform search: $e');
+        _controller.clear();
       }
     } else {
       _showErrorDialog('Search query cannot be empty.');
@@ -133,46 +135,64 @@ class _SearchTextFieldState extends State<SearchTextField> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TextField(
+        SearchBar(
+          elevation: MaterialStateProperty.resolveWith((states) => 3),
+          backgroundColor: MaterialStateColor.resolveWith(
+            (states) => Theme.of(context).colorScheme.surface,
+          ),
           focusNode: searchBarFocus,
           controller: _controller,
-          maxLength: 50,
-          minLines: 1,
-          decoration: InputDecoration(
-            suffixIconColor: searchBarFocus.hasFocus
-                ? Theme.of(context).colorScheme.primary
-                : Theme.of(context).colorScheme.secondary,
-            suffixIcon: IconButton(
+          hintText: 'Search ENMU:',
+          onSubmitted: (_) => _performSearch(context),
+          trailing: <Widget>[
+            IconButton(
               tooltip: "Submit Query",
-              color: searchBarFocus.hasFocus
-                  ? Theme.of(context).colorScheme.primary
-                  : Theme.of(context).colorScheme.secondary,
-              iconSize: 26,
               onPressed: () => _performSearch(context),
               icon: const Icon(Icons.arrow_forward),
-            ),
-            contentPadding: const EdgeInsets.all(15),
-            hintText: 'Search ENMU:',
-            hintStyle: const TextStyle(fontSize: 18),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(35.0),
-              borderSide: BorderSide(
-                color: Theme.of(context).colorScheme.secondary,
-                width: 1.5,
-              ),
-            ),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(35.0),
-              borderSide: BorderSide(
-                color: Theme.of(context).colorScheme.secondary,
-                width: 1.5,
-              ),
-            ),
-          ),
-          autocorrect: true,
-          enableSuggestions: true,
-          onSubmitted: (_) => _performSearch(context),
-        ),
+              iconSize: 26,
+            )
+          ],
+        )
+        // TextField(
+        //   focusNode: searchBarFocus,
+        //   controller: _controller,
+        //   maxLength: 50,
+        //   minLines: 1,
+        //   decoration: InputDecoration(
+        //     suffixIconColor: searchBarFocus.hasFocus
+        //         ? Theme.of(context).colorScheme.primary
+        //         : Theme.of(context).colorScheme.secondary,
+        //     suffixIcon: IconButton(
+        //       tooltip: "Submit Query",
+        //       color: searchBarFocus.hasFocus
+        //           ? Theme.of(context).colorScheme.primary
+        //           : Theme.of(context).colorScheme.secondary,
+        //       iconSize: 26,
+        //       onPressed: () => _performSearch(context),
+        //       icon: const Icon(Icons.arrow_forward),
+        //     ),
+        //     contentPadding: const EdgeInsets.all(15),
+        //     hintText: 'Search ENMU:',
+        //     hintStyle: const TextStyle(fontSize: 18),
+        //     enabledBorder: OutlineInputBorder(
+        //       borderRadius: BorderRadius.circular(35.0),
+        //       borderSide: BorderSide(
+        //         color: Theme.of(context).colorScheme.secondary,
+        //         width: 1.5,
+        //       ),
+        //     ),
+        //     border: OutlineInputBorder(
+        //       borderRadius: BorderRadius.circular(35.0),
+        //       borderSide: BorderSide(
+        //         color: Theme.of(context).colorScheme.secondary,
+        //         width: 1.5,
+        //       ),
+        //     ),
+        //   ),
+        //   autocorrect: true,
+        //   enableSuggestions: true,
+        //   onSubmitted: (_) => _performSearch(context),
+        // ),
         // ElevatedButton(
         //   onPressed: () => _performSearch(context),
         //   child: const Text('Search'),

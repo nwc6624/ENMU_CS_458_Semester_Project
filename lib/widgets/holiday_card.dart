@@ -103,7 +103,7 @@ class _HolidayCardState extends State<HolidayCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return Card(elevation: 3,
       child: Column(
         children: [
           ListTile(

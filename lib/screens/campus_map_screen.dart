@@ -162,12 +162,13 @@ class _CampusMapScreenState extends State<CampusMapScreen> {
                   Theme.of(context).colorScheme.onSecondaryContainer,
               backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
               onPressed: () {
+                //TODO: Open device navigation app
                 // _launchMapsUrl();
               },
               child: const Icon(Icons.navigation_outlined),
             ),
           ),
-        )
+        ),
       ],
     );
   }
