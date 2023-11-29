@@ -1,4 +1,3 @@
-
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -29,16 +28,57 @@ class _HolidayCardState extends State<HolidayCard> {
   }
 
   void _calculateHolidayDate() {
-    final currentYear = DateTime
-        .now()
-        .year;
-    // Define holidays in the current year
-    final holiday1 = DateTime(currentYear, 11, 19); // November 19th
-    final holiday2 = DateTime(currentYear, 12, 25); // December 25th
-    final now = DateTime.now();
+    final currentYear = DateTime.now().year;
 
-    // Set the holidayDate to the next upcoming holiday
-    holidayDate = now.isBefore(holiday1) ? holiday1 : holiday2;
+    final newYearsDay = DateTime(currentYear, 1, 1);
+    final martinLutherKingJrDay = _findNthDayOfMonth(currentYear, 1, DateTime.monday, 3);
+    final presidentsDay = _findNthDayOfMonth(currentYear, 2, DateTime.monday, 3);
+    final memorialDay = _findLastDayOfMonth(currentYear, 5, DateTime.monday);
+    final independenceDay = DateTime(currentYear, 7, 4);
+    final laborDay = _findNthDayOfMonth(currentYear, 9, DateTime.monday, 1);
+    final columbusDay = _findNthDayOfMonth(currentYear, 10, DateTime.monday, 2);
+    final veteransDay = DateTime(currentYear, 11, 11);
+    final thanksgivingDay = _findNthDayOfMonth(currentYear, 11, DateTime.thursday, 4);
+    final christmasDay = DateTime(currentYear, 12, 25);
+
+    final holidays = [
+      newYearsDay,
+      martinLutherKingJrDay,
+      presidentsDay,
+      memorialDay,
+      independenceDay,
+      laborDay,
+      columbusDay,
+      veteransDay,
+      thanksgivingDay,
+      christmasDay,
+    ];
+
+    // Sort holidays and find the next upcoming holiday
+    holidays.sort((a, b) => a.compareTo(b));
+    final now = DateTime.now();
+    holidayDate = holidays.firstWhere((date) => date.isAfter(now), orElse: () => holidays[0]);
+  }
+
+  DateTime _findNthDayOfMonth(int year, int month, int weekday, int nth) {
+    var date = DateTime(year, month, 1);
+    var count = 0;
+    while (true) {
+      if (date.weekday == weekday) {
+        count++;
+        if (count == nth) break;
+      }
+      date = date.add(const Duration(days: 1));
+    }
+    return date;
+  }
+
+  DateTime _findLastDayOfMonth(int year, int month, int weekday) {
+    var date = DateTime(year, month + 1, 0); // Last day of the month
+    while (date.weekday != weekday) {
+      date = date.subtract(const Duration(days: 1));
+    }
+    return date;
   }
 
   void _startTimer() {
@@ -85,9 +125,7 @@ class _HolidayCardState extends State<HolidayCard> {
           if (_timeRemaining > Duration.zero) Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              'Countdown: ${_timeRemaining.inDays} days, ${_timeRemaining
-                  .inHours % 24} hours, ${_timeRemaining.inMinutes %
-                  60} minutes',
+              'Countdown: ${_timeRemaining.inDays} days, ${_timeRemaining.inHours % 24} hours, ${_timeRemaining.inMinutes % 60} minutes',
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
