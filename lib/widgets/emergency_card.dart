@@ -31,7 +31,7 @@ class EmergencyCard extends StatelessWidget {
           title: const Text('Call Campus Police'),
           content: const Text(
             'If you are in an emergency, call 911.\n'
-                'Are you sure you want to call?',
+            'Are you sure you want to call?',
           ),
           actionsAlignment: MainAxisAlignment.spaceBetween,
           actions: <Widget>[
@@ -59,7 +59,8 @@ class EmergencyCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(elevation: 3,
+    return Card(
+      elevation: 3,
       child: ListTile(
         onTap: () {
           Navigator.of(context).push(
