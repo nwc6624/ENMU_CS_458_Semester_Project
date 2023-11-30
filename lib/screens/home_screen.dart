@@ -150,9 +150,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 8.0,
-              ),
+              padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
               child: SearchTextField(
                 scaffoldKey: _scaffoldKey,
               ),
