@@ -136,7 +136,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Web View'),
+        title: const Text('ENMUmobile'),
       ),
       body: Stack(
         children: <Widget>[
