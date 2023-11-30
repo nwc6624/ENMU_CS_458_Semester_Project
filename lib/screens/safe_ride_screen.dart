@@ -23,9 +23,129 @@ class SafeRide extends StatelessWidget {
     }
   }
 
+  Widget _landscape(double screenWidth) {
+    return Column(
+      children: [
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Flexible(
+              child: Image.asset('assets/images/safe-ride-logo.png'),
+            ),
+            Flexible(
+              flex: 2,
+              child: Column(
+                children: [
+                  TextButton(
+                    onPressed: () => _makePhoneCall('5756079995'),
+                    child: Text(
+                      '575.607.9995',
+                      style: TextStyle(
+                        fontSize: screenWidth <= 360 ? 22 : 20,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  TextButton(
+                    onPressed: () => _makePhoneCall('5756075999'),
+                    child: Text(
+                      '575.607.5999',
+                      style: TextStyle(
+                        fontSize: screenWidth <= 360 ? 22 : 20,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+        const SizedBox(
+          height: 16,
+        ),
+        Text(
+          'ENMU Safe Ride is a free program designated for any and all current ENMU students to be picked up and transported '
+          'safely home anywhere within Portales city limits when in unsafe situations or unable to drive due to being under the '
+          'influence. The operating hours are Thursdays from 8 a.m. to Sunday at 12 a.m. The drivers are students and keep the '
+          'program private and confidential.',
+          style: TextStyle(
+            fontSize: screenWidth <= 360 ? 22 : 20,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _portrait(double screenWidth) {
+    return Column(
+      // Portrait Builder
+      children: [
+        Image.asset('assets/images/safe-ride-logo.png'),
+        screenWidth <= 330
+            ? Column(
+                children: [
+                  TextButton(
+                    onPressed: () => _makePhoneCall('5756079995'),
+                    child: Text(
+                      '575.607.9995',
+                      style: TextStyle(
+                        fontSize: screenWidth <= 360 ? 22 : 20,
+                      ),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () => _makePhoneCall('5756075999'),
+                    child: Text(
+                      '575.607.5999',
+                      style: TextStyle(
+                        fontSize: screenWidth <= 360 ? 22 : 20,
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            : Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  TextButton(
+                    onPressed: () => _makePhoneCall('5756079995'),
+                    child: Text(
+                      '575.607.9995',
+                      style: TextStyle(
+                        fontSize: screenWidth <= 360 ? 22 : 20,
+                      ),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () => _makePhoneCall('5756075999'),
+                    child: Text(
+                      '575.607.5999',
+                      style: TextStyle(
+                        fontSize: screenWidth <= 360 ? 22 : 20,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+        const SizedBox(
+          height: 16,
+        ),
+        Text(
+          'ENMU Safe Ride is a free program designated for any and all current ENMU students to be picked up and transported '
+          'safely home anywhere within Portales city limits when in unsafe situations or unable to drive due to being under the '
+          'influence. The operating hours are Thursdays from 8 a.m. to Sunday at 12 a.m. The drivers are students and keep the '
+          'program private and confidential.',
+          style: TextStyle(
+            fontSize: screenWidth <= 360 ? 22 : 20,
+          ),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
     final Uri toLaunch = Uri(
         scheme: 'https',
         host: 'www.facebook.com',
@@ -45,103 +165,17 @@ class SafeRide extends StatelessWidget {
       body: SafeArea(
         child: OrientationBuilder(
           builder: (context, orientation) {
+            double screenWidth =
+                MediaQuery.of(context).size.width; // get screen width
             return SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 16,
                   vertical: 16,
                 ),
-                child: orientation == Orientation.landscape   // Landscape builder
-                    ? Column(
-                      children: [
-                        Row(crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Flexible(
-                                child:
-                                    Image.asset('assets/images/safe-ride-logo.png'),
-                              ),
-                              Flexible(flex: 2,
-                                child: Column(
-                                  children: [
-                                    TextButton(
-                                      onPressed: () => _makePhoneCall('5756079995'),
-                                      child: Text(
-                                        '575.607.9995',
-                                        style: TextStyle(
-                                          fontSize: screenWidth <= 360 ? 22 : 20,
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(height: 10),
-                                    TextButton(
-                                      onPressed: () => _makePhoneCall('5756075999'),
-                                      child: Text(
-                                        '575.607.5999',
-                                        style: TextStyle(
-                                          fontSize: screenWidth <= 360 ? 22 : 20,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        Text(
-                          'ENMU Safe Ride is a free program designated for any and all current ENMU students to be picked up and transported '
-                              'safely home anywhere within Portales city limits when in unsafe situations or unable to drive due to being under the '
-                              'influence. The operating hours are Thursdays from 8 a.m. to Sunday at 12 a.m. The drivers are students and keep the '
-                              'program private and confidential.',
-                          style: TextStyle(
-                            fontSize: screenWidth <= 360 ? 22 : 20,
-                          ),
-                        ),
-                      ],
-                    )
-                    : Column(             // Portrait Builder
-                        children: [
-                          Image.asset('assets/images/safe-ride-logo.png'),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              TextButton(
-                                onPressed: () => _makePhoneCall('5756079995'),
-                                child: Text(
-                                  '575.607.9995',
-                                  style: TextStyle(
-                                    fontSize: screenWidth <= 360 ? 22 : 20,
-                                  ),
-                                ),
-                              ),
-                              TextButton(
-                                onPressed: () => _makePhoneCall('5756075999'),
-                                child: Text(
-                                  '575.607.5999',
-                                  style: TextStyle(
-                                    fontSize: screenWidth <= 360 ? 22 : 20,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 16,
-                          ),
-                          Text(
-                            'ENMU Safe Ride is a free program designated for any and all current ENMU students to be picked up and transported '
-                            'safely home anywhere within Portales city limits when in unsafe situations or unable to drive due to being under the '
-                            'influence. The operating hours are Thursdays from 8 a.m. to Sunday at 12 a.m. The drivers are students and keep the '
-                            'program private and confidential.',
-                            style: TextStyle(
-                              fontSize: screenWidth <= 360 ? 22 : 20,
-                            ),
-                          ),
-                        ],
-                      ),
+                child: orientation == Orientation.landscape // Landscape builder
+                    ? _landscape(screenWidth)
+                    : _portrait(screenWidth),
               ),
             );
           },
