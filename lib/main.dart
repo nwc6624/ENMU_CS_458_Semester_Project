@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:enmu_mobile/nav_bar_handler.dart';
+import 'package:enmu_mobile/widgets/nav_bar_handler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
