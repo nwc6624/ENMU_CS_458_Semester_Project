@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:enmu_mobile/models/scrape_enmu.dart'; // Correct import for the API folder
+import 'package:enmu_mobile/models/scrape_enmu.dart'; // Import for the API folder
 import 'package:webview_flutter/webview_flutter.dart'; // Import for WebView
 
 class SearchTextField extends StatefulWidget {
@@ -14,8 +14,13 @@ class SearchTextField extends StatefulWidget {
 
 class _SearchTextFieldState extends State<SearchTextField> {
   final TextEditingController _controller = TextEditingController();
+  bool _isLoading = false; // State variable for loading indicator
 
   Future<void> _performSearch(BuildContext context) async {
+    setState(() {
+      _isLoading = true; // Start loading
+    });
+
     // Dismiss the keyboard
     FocusScope.of(context).unfocus();
 
@@ -52,8 +57,7 @@ class _SearchTextFieldState extends State<SearchTextField> {
                               'Read more',
                               style: TextStyle(color: Colors.green),
                             ),
-                            onTap: () =>
-                                _launchURL(context, result['url'] ?? ''),
+                            onTap: () => _launchURL(context, result['url'] ?? ''),
                           ),
                           const SizedBox(height: 10),
                         ],
@@ -83,6 +87,12 @@ class _SearchTextFieldState extends State<SearchTextField> {
       }
     } else {
       _showErrorDialog('Search query cannot be empty.');
+    }
+
+    if (mounted) {
+      setState(() {
+        _isLoading = false; // Stop loading
+      });
     }
   }
 
@@ -128,6 +138,7 @@ class _SearchTextFieldState extends State<SearchTextField> {
   @override
   void dispose() {
     searchBarFocus.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
@@ -138,74 +149,40 @@ class _SearchTextFieldState extends State<SearchTextField> {
         SearchBar(
           elevation: MaterialStateProperty.resolveWith((states) => 3),
           backgroundColor: MaterialStateColor.resolveWith(
-            (states) => Theme.of(context).colorScheme.surface,
+                (states) => Theme.of(context).colorScheme.surface,
           ),
           focusNode: searchBarFocus,
           controller: _controller,
           hintText: 'Search ENMU:',
           onSubmitted: (_) => _performSearch(context),
           trailing: <Widget>[
-            IconButton(
+            _isLoading
+                ? CircularProgressIndicator() // Show loading circle
+                : IconButton(
               tooltip: "Submit Query",
               onPressed: () => _performSearch(context),
               icon: const Icon(Icons.arrow_forward),
               iconSize: 26,
-            )
+            ),
           ],
-        )
-        // TextField(
-        //   focusNode: searchBarFocus,
-        //   controller: _controller,
-        //   maxLength: 50,
-        //   minLines: 1,
-        //   decoration: InputDecoration(
-        //     suffixIconColor: searchBarFocus.hasFocus
-        //         ? Theme.of(context).colorScheme.primary
-        //         : Theme.of(context).colorScheme.secondary,
-        //     suffixIcon: IconButton(
-        //       tooltip: "Submit Query",
-        //       color: searchBarFocus.hasFocus
-        //           ? Theme.of(context).colorScheme.primary
-        //           : Theme.of(context).colorScheme.secondary,
-        //       iconSize: 26,
-        //       onPressed: () => _performSearch(context),
-        //       icon: const Icon(Icons.arrow_forward),
-        //     ),
-        //     contentPadding: const EdgeInsets.all(15),
-        //     hintText: 'Search ENMU:',
-        //     hintStyle: const TextStyle(fontSize: 18),
-        //     enabledBorder: OutlineInputBorder(
-        //       borderRadius: BorderRadius.circular(35.0),
-        //       borderSide: BorderSide(
-        //         color: Theme.of(context).colorScheme.secondary,
-        //         width: 1.5,
-        //       ),
-        //     ),
-        //     border: OutlineInputBorder(
-        //       borderRadius: BorderRadius.circular(35.0),
-        //       borderSide: BorderSide(
-        //         color: Theme.of(context).colorScheme.secondary,
-        //         width: 1.5,
-        //       ),
-        //     ),
-        //   ),
-        //   autocorrect: true,
-        //   enableSuggestions: true,
-        //   onSubmitted: (_) => _performSearch(context),
-        // ),
-        // ElevatedButton(
-        //   onPressed: () => _performSearch(context),
-        //   child: const Text('Search'),
-        // ),
+        ),
+        // Other widgets, if any...
       ],
     );
   }
 }
 
-class WebViewScreen extends StatelessWidget {
+class WebViewScreen extends StatefulWidget {
   final String url;
 
   const WebViewScreen({Key? key, required this.url}) : super(key: key);
+
+  @override
+  _WebViewScreenState createState() => _WebViewScreenState();
+}
+
+class _WebViewScreenState extends State<WebViewScreen> {
+  bool _isLoading = true;
 
   @override
   Widget build(BuildContext context) {
@@ -213,10 +190,27 @@ class WebViewScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text("ENMUmobile"),
       ),
-      body: WebView(
-        initialUrl: url,
-        javascriptMode:
-            JavascriptMode.unrestricted, // Ensures JavaScript can run
+      body: Stack(
+        children: [
+          WebView(
+            initialUrl: widget.url,
+            javascriptMode: JavascriptMode.unrestricted,
+            onPageFinished: (url) {
+              setState(() {
+                _isLoading = false;
+              });
+            },
+            onWebResourceError: (error) {
+              setState(() {
+                _isLoading = false;
+              });
+              ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text("Internet connection error."))
+              );
+            },
+          ),
+          _isLoading ? Center(child: CircularProgressIndicator()) : Container(),
+        ],
       ),
     );
   }
