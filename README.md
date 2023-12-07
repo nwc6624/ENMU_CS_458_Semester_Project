@@ -58,9 +58,9 @@ Add additional notes about how to deploy this on a live system
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [Flutter](https://flutter.dev/) - UI SDK used
+* [Dart](https://dart.dev/) - Language used
+* [Open Street Maps](https://www.openstreetmap.org/) - Used to display real time-map of the city of Portales
 
 ## Contributing
 
@@ -72,8 +72,8 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-* **Noah Caulfield** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-*  **Jake Gill**
+* **Noah Caulfield** - *Senior in Computer Science* - [Github](https://github.com/nwc6624)
+*  **Jake Gill**     - *Senior in Industrial Mathematics* - [Github](https://github.com/GillieWillie)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
