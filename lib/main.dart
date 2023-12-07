@@ -4,16 +4,29 @@ import 'package:enmu_mobile/widgets/nav_bar_handler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
-Future main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Future.delayed(const Duration(seconds: 8));
+void main() {
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   SystemChrome.setEnabledSystemUIMode(
     SystemUiMode.manual,
     overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top],
   );
-  FlutterNativeSplash.remove();
   runApp(const MyApp());
+
+// whenever your initialization is completed, remove the splash screen:
+  FlutterNativeSplash.remove();
 }
+
+// Future main() async {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   await Future.delayed(const Duration(seconds: 8));
+//   SystemChrome.setEnabledSystemUIMode(
+//     SystemUiMode.manual,
+//     overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top],
+//   );
+//   FlutterNativeSplash.remove();
+//   runApp(const MyApp());
+// }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
