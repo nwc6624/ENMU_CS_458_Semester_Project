@@ -57,8 +57,7 @@ class _SearchTextFieldState extends State<SearchTextField> {
                               'Read more',
                               style: TextStyle(color: Colors.green),
                             ),
-                            onTap: () =>
-                                _launchURL(context, result['url'] ?? ''),
+                            onTap: () => _launchURL(context, result['url'] ?? ''),
                           ),
                           const SizedBox(height: 10),
                         ],
@@ -150,7 +149,7 @@ class _SearchTextFieldState extends State<SearchTextField> {
         SearchBar(
           elevation: MaterialStateProperty.resolveWith((states) => 3),
           backgroundColor: MaterialStateColor.resolveWith(
-            (states) => Theme.of(context).colorScheme.surface,
+                (states) => Theme.of(context).colorScheme.surface,
           ),
           focusNode: searchBarFocus,
           controller: _controller,
@@ -205,6 +204,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
               setState(() {
                 _isLoading = false;
               });
+
               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                   content: Text(
                 "Internet connection error.",
