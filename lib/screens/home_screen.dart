@@ -18,6 +18,167 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
+  Widget _landscapeNonScrollable() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: 25,
+            horizontal: 25,
+          ),
+          child: SearchTextField(
+            scaffoldKey: _scaffoldKey,
+          ),
+        ),
+        const Spacer(),
+        const Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: 25,
+          ),
+          child: Column(
+            children: [
+              SafeRideCard(
+                title: 'Safe Ride',
+                date: 'Thursday-Sunday',
+                time: '8am-12am',
+              ),
+              SizedBox(height: 4),
+              EmergencyCard(
+                title: 'ENMU Police',
+                icon: Icon(Icons.local_police),
+              ),
+              SizedBox(height: 4),
+              HolidayCard(
+                title: 'Next School Holiday',
+              ),
+              SizedBox(height: 8),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _landscapeScrollable() {
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 25,
+              vertical: 25,
+            ),
+            child: SearchTextField(
+              scaffoldKey: _scaffoldKey,
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 25,
+            ),
+            child: Column(
+              children: [
+                SafeRideCard(
+                  title: 'SafeRide',
+                  date: 'Thursday-Sunday',
+                  time: '8am-12am',
+                ),
+                SizedBox(height: 4),
+                EmergencyCard(
+                  title: 'ENMU Police',
+                  icon: Icon(Icons.local_police),
+                ),
+                SizedBox(height: 4),
+                HolidayCard(
+                  title: 'Next School Holiday',
+                ),
+                SizedBox(height: 8),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _portraitNonScrollable(double screenWidth) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(10, 25, 10, 8),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 8.0,
+            ),
+            child: SearchTextField(
+              scaffoldKey: _scaffoldKey,
+            ),
+          ),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                SafeRideCard(
+                  title: 'Safe Ride',
+                  date: screenWidth < 350 ? '' : 'Thursday-Sunday',
+                  time: screenWidth < 350 ? '' : '8am-12am',
+                ),
+                const SizedBox(height: 4),
+                const EmergencyCard(
+                  title: 'ENMU Police',
+                  icon: Icon(Icons.local_police),
+                ),
+                const SizedBox(height: 4),
+                const HolidayCard(
+                  title: 'Next School Holiday',
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _portraitScrollable(double screenWidth) {
+    return Padding(
+      // Portrait Orientation
+      padding: const EdgeInsets.fromLTRB(10, 25, 10, 8),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
+              child: SearchTextField(
+                scaffoldKey: _scaffoldKey,
+              ),
+            ),
+            Column(
+              children: [
+                SafeRideCard(
+                  title: 'Safe Ride',
+                  date: screenWidth < 350 ? 'Thr-Sun' : 'Thursday-Sunday',
+                  time: '8am-12am',
+                ),
+              ],
+            ),
+            const SizedBox(height: 4),
+            const EmergencyCard(
+              title: 'ENMU Police',
+              icon: Icon(Icons.local_police),
+            ),
+            const SizedBox(height: 4),
+            const HolidayCard(
+              title: 'Next School Holiday',
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final appBarHeight = AppBar().preferredSize.height;
@@ -66,164 +227,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   ? SafeArea(
                       child: availableScreenHeight >
                               385 // This is the cumulative height of all home screen components
-                          ? Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 25,
-                                    horizontal: 25,
-                                  ),
-                                  child: SearchTextField(
-                                    scaffoldKey: _scaffoldKey,
-                                  ),
-                                ),
-                                const Spacer(),
-                                const Padding(
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: 25,
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      SafeRideCard(
-                                        title: 'Safe Ride',
-                                        date: 'Thursday-Sunday',
-                                        time: '8am-12am',
-                                      ),
-                                      SizedBox(height: 4),
-                                      EmergencyCard(
-                                        title: 'ENMU Police',
-                                        icon: Icon(Icons.local_police),
-                                      ),
-                                      SizedBox(height: 4),
-                                      HolidayCard(
-                                        title: 'Next School Holiday',
-                                      ),
-                                      SizedBox(height: 8),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            )
-                          : SingleChildScrollView(
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 25,
-                                      vertical: 25,
-                                    ),
-                                    child: SearchTextField(
-                                      scaffoldKey: _scaffoldKey,
-                                    ),
-                                  ),
-                                  const Padding(
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: 25,
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        SafeRideCard(
-                                          title: 'SafeRide',
-                                          date: 'Thursday-Sunday',
-                                          time: '8am-12am',
-                                        ),
-                                        SizedBox(height: 4),
-                                        EmergencyCard(
-                                          title: 'ENMU Police',
-                                          icon: Icon(Icons.local_police),
-                                        ),
-                                        SizedBox(height: 4),
-                                        HolidayCard(
-                                          title: 'Next School Holiday',
-                                        ),
-                                        SizedBox(height: 8),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                          ? _landscapeNonScrollable()
+                          : _landscapeScrollable(),
                     )
-                  : availableScreenHeight >= 445 // Portrait Landscape
-                      ? Padding(
-                          padding: const EdgeInsets.fromLTRB(10, 25, 10, 8),
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 8.0,
-                                ),
-                                child: SearchTextField(
-                                  scaffoldKey: _scaffoldKey,
-                                ),
-                              ),
-                              Expanded(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    SafeRideCard(
-                                      title: 'Safe Ride',
-                                      date: screenWidth < 350
-                                          ? ''
-                                          : 'Thursday-Sunday',
-                                      time: screenWidth < 350 ? '' : '8am-12am',
-                                    ),
-                                    const SizedBox(height: 4),
-                                    const EmergencyCard(
-                                      title: 'ENMU Police',
-                                      icon: Icon(Icons.local_police),
-                                    ),
-                                    const SizedBox(height: 4),
-                                    const HolidayCard(
-                                      title: 'Next School Holiday',
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                      : Padding(
-                          // Portrait Landscape
-                          padding: const EdgeInsets.fromLTRB(10, 25, 10, 8),
-                          child: SingleChildScrollView(
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 8.0,
-                                  ),
-                                  child: SearchTextField(
-                                    scaffoldKey: _scaffoldKey,
-                                  ),
-                                ),
-                                Column(
-                                  children: [
-                                    SafeRideCard(
-                                      title: 'Safe Ride',
-                                      date: screenWidth < 350
-                                          ? 'Thr-Sun'
-                                          : 'Thursday-Sunday',
-                                      time: '8am-12am',
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 4),
-                                const EmergencyCard(
-                                  title: 'ENMU Police',
-                                  icon: Icon(Icons.local_police),
-                                ),
-                                const SizedBox(height: 4),
-                                const HolidayCard(
-                                  title: 'Next School Holiday',
-                                )
-                              ],
-                            ),
-                          ),
-                        );
+                  : availableScreenHeight >= 445 // Portrait Orientation
+                      ? _portraitNonScrollable(screenWidth)
+                      : _portraitScrollable(screenWidth);
             },
           ),
         ),

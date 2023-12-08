@@ -157,13 +157,13 @@ class _SearchTextFieldState extends State<SearchTextField> {
           onSubmitted: (_) => _performSearch(context),
           trailing: <Widget>[
             _isLoading
-                ? CircularProgressIndicator() // Show loading circle
+                ? const CircularProgressIndicator() // Show loading circle
                 : IconButton(
-              tooltip: "Submit Query",
-              onPressed: () => _performSearch(context),
-              icon: const Icon(Icons.arrow_forward),
-              iconSize: 26,
-            ),
+                    tooltip: "Submit Query",
+                    onPressed: () => _performSearch(context),
+                    icon: const Icon(Icons.arrow_forward),
+                    iconSize: 26,
+                  ),
           ],
         ),
         // Other widgets, if any...
@@ -204,12 +204,18 @@ class _WebViewScreenState extends State<WebViewScreen> {
               setState(() {
                 _isLoading = false;
               });
-              ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text("Internet connection error."))
-              );
+
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  content: Text(
+                "Internet connection error.",
+              )));
             },
           ),
-          _isLoading ? Center(child: CircularProgressIndicator()) : Container(),
+          _isLoading
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Container(),
         ],
       ),
     );
