@@ -9,6 +9,7 @@
 ## Getting Started
 
 <h1>Project Setup Instructions</h1>
+![Screenshot_20231211-183934](https://github.com/nwc6624/ENMU_CS_458_Semester_Project/assets/6959463/81801da1-433f-4f31-89f8-20cabe724c6a)
 
 <p>This guide walks you through the process of downloading and setting up the project in Android Studio, assuming Flutter and Dart are already installed.</p>
 
@@ -153,7 +154,29 @@ Give an example
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+<h2>Running the App on a Device</h2>
+
+<ol>
+    <li><strong>Enable Developer Options and USB Debugging:</strong>
+        <ul>
+            <li>On your Android device, go to <code>Settings &gt; About phone</code>, tap <code>Build number</code> 7 times.</li>
+            <li>Go to <code>Settings &gt; System &gt; Advanced &gt; Developer options</code>, enable <code>USB debugging</code>.</li>
+        </ul>
+    </li>
+    <li><strong>Connect Device to Computer:</strong>
+        <p>Use a USB cable to connect your device to the computer.</p>
+    </li>
+    <li><strong>Run the App from Android Studio:</strong>
+        <ul>
+            <li>Open your project in Android Studio.</li>
+            <li>Select your device from the dropdown in the toolbar.</li>
+            <li>Click the ‘Run’ button.</li>
+        </ul>
+    </li>
+</ol>
+
+<p><em>Note: This project is TBA for Google Play Store deployment.</em></p>
+
 
 ## Built With
 
