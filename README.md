@@ -176,7 +176,7 @@ flutter:
 
 <h3>Sync Your Project:</h3>
 <p>If needed, click on <strong>Sync Now</strong> in the bar that appears at the top of the IDE to ensure everything is up to date.</p>
-<!--
+
 ## Running the tests
 
 Explain how to run the automated tests for this system
@@ -196,7 +196,7 @@ Explain what these tests test and why
 ```
 Give an example
 ```
--->
+
 ## Deployment
 
 <h2>Running the App on an Android Device</h2>
