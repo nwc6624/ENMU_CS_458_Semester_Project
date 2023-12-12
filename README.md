@@ -8,7 +8,46 @@
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+<h1>Project Setup Instructions</h1>
+
+<p>This guide walks you through the process of downloading and setting up the project in Android Studio, assuming Flutter and Dart are already installed.</p>
+
+<h2>Steps</h2>
+
+<h3>1. Clone the Repository</h3>
+<p>Open Android Studio and follow these steps:</p>
+<ul>
+    <li>Navigate to <code>File &gt; New &gt; Project from Version Control</code>.</li>
+    <li>In the URL field, enter <code>https://github.com/nwc6624/ENMU_CS_458_Semester_Project.git</code>.</li>
+    <li>Select the directory to clone into and click <code>Clone</code>.</li>
+</ul>
+
+<h3>2. Open the Cloned Project</h3>
+<p>If the project isn't automatically opened:</p>
+<ul>
+    <li>Go to <code>File &gt; Open</code>.</li>
+    <li>Select the cloned project directory.</li>
+</ul>
+
+<h3>3. Install Flutter and Dart Plugins</h3>
+<p>If not already installed:</p>
+<ul>
+    <li>Go to <code>File &gt; Settings &gt; Plugins</code>.</li>
+    <li>Search and install <code>Flutter</code>. This should also install <code>Dart</code>.</li>
+    <li>Restart Android Studio.</li>
+</ul>
+
+<h3>4. Get Dependencies</h3>
+<p>Within Android Studio's terminal:</p>
+<ul>
+    <li>Run <code>flutter pub get</code> in the project's root directory.</li>
+</ul>
+
+<h3>5. Run the Project</h3>
+<ul>
+    <li>Select a device or emulator.</li>
+    <li>Click the 'Run' icon.</li>
+</ul>
 
 ### Prerequisites
 
