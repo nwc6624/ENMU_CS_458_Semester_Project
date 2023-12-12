@@ -51,12 +51,52 @@
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+<head>
+    <title>Project Prerequisites and Dependencies</title>
+</head>
+<body>
 
-```
-Give examples
-```
+<h1>Project Prerequisites and Dependencies</h1>
 
+<p>Before setting up the project, ensure you have the following software and dependencies installed:</p>
+
+<h2>Required Software</h2>
+<!-- Software Installation Guide Here -->
+
+<h2>Flutter Dependencies</h2>
+<p>Add the following dependencies to your <code>pubspec.yaml</code> file:</p>
+
+<pre>
+dependencies:
+  flutter:
+    sdk: flutter
+  latlong2: ^0.9.0      # Upgraded to ^0.9.0 to resolve the version conflict
+  url_launcher: ^6.2.1
+  cupertino_icons: ^1.0.2
+  image_gallery_saver: ^2.0.3
+  connectivity_plus: ^5.0.1
+  syncfusion_flutter_pdfviewer: ^23.1.43
+  webview_flutter: ^3.0.3
+  flutter_map: ^6.0.1
+  http: ^1.0.0
+  html: ^0.15.0
+  flutter_native_splash: ^2.3.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/pdfs/
+</pre>
+
+<!-- Additional Setup Instructions Here -->
+
+</body>
 ### Installing
 
 A step by step series of examples that tell you how to get a development env running
