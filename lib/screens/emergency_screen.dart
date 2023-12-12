@@ -1,5 +1,7 @@
-import 'package:enmu_mobile/screens/show_map_image.dart';
 import 'package:flutter/material.dart';
+
+import 'package:url_launcher/url_launcher.dart';
+import 'package:enmu_mobile/screens/show_map_image.dart';
 
 class EmergencyScreen extends StatefulWidget {
   const EmergencyScreen({super.key});
@@ -18,6 +20,15 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
         child: MapImage(pdfPath: 'assets/pdfs/emergency-survival-guide.pdf'),
       ),
     );
+  }
+
+  void _makePhoneCall(String phoneNumber) async {
+    final Uri phoneCall = Uri(scheme: 'tel', path: phoneNumber);
+    if (await canLaunchUrl(phoneCall)) {
+      await launchUrl(phoneCall);
+    } else {
+      throw 'Could not call $phoneCall';
+    }
   }
 
   Widget _portrait() {
@@ -42,7 +53,7 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                         children: [
                           const Text('Non-Emergency Police Issues:'),
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () => _makePhoneCall('5755622392'),
                             child: const Text(
                               'Call (575) 562-2392',
                             ),
@@ -54,7 +65,7 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                         children: [
                           const Text('After Hours/Weekends/ Holidays:'),
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () => _makePhoneCall('5757602945'),
                             child: const Text(
                               'Call (575) 760-2945',
                             ),
@@ -69,8 +80,6 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                               builder: (context) => showPDF(context),
                             ),
                           );
-                          // SfPdfViewer.asset(
-                          //     'assets/pdfs/emergency-survival-guide.pdf');
                         },
                         child: const Text(
                           'View Emergency Survival Guide',
@@ -135,11 +144,12 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                         children: [
                           const Text('Non-Emergency Police Issues:'),
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () => _makePhoneCall('5755622392'),
                             child: const Text(
                               'Call (575) 562-2392',
                             ),
-                          ),const SizedBox(height: 8),
+                          ),
+                          const SizedBox(height: 8),
                         ],
                       ),
                       Column(
@@ -147,7 +157,7 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                         children: [
                           const Text('After Hours/Weekends/ Holidays:'),
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () => _makePhoneCall('5757602945'),
                             child: const Text(
                               'Call (575) 760-2945',
                             ),
@@ -162,8 +172,6 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                               builder: (context) => showPDF(context),
                             ),
                           );
-                          // SfPdfViewer.asset(
-                          //     'assets/pdfs/emergency-survival-guide.pdf');
                         },
                         child: const Text(
                           'View Emergency Survival Guide',
@@ -228,7 +236,6 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
             children: [
               Card(
                 elevation: 6,
-                // margin: EdgeInsets.all(16),
                 child: Padding(
                   padding: EdgeInsets.all(16.0),
                   child: Column(
@@ -269,7 +276,7 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                 children: [
                   const Text('Non-Emergency Police Issues:'),
                   ElevatedButton(
-                    onPressed: () {}, //TODO: Implement calling
+                    onPressed: () => _makePhoneCall('5755622392'),
                     child: const Text(
                       'Call (575) 562-2392',
                     ),
@@ -281,7 +288,7 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                 children: [
                   const Text('After Hours/Weekends/ Holidays:'),
                   ElevatedButton(
-                    onPressed: () {}, //TODO: Implement calling
+                    onPressed: () => _makePhoneCall('5757602945'),
                     child: const Text(
                       'Call (575) 760-2945',
                     ),
@@ -296,8 +303,6 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                       builder: (context) => showPDF(context),
                     ),
                   );
-                  // SfPdfViewer.asset(
-                  //     'assets/pdfs/emergency-survival-guide.pdf');
                 },
                 child: const Text(
                   'View Emergency Survival Guide',
