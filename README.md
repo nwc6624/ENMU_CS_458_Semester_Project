@@ -207,7 +207,7 @@ Give an example
 * **Noah Caulfield** - *Senior in Computer Science* - [Github](https://github.com/nwc6624)
 *  **Jake Gill**     - *Senior in Industrial Mathematics* - [Github](https://github.com/GillieWillie)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/nwc6624/ENMU_CS_458_Semester_Project/blob/main/s1_team_proj_idea.txt) who participated in this project.
 
 ## License
 
