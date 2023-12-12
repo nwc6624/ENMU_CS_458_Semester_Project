@@ -51,11 +51,6 @@
 
 ### Prerequisites
 
-<head>
-    <title>Project Prerequisites and Dependencies</title>
-</head>
-<body>
-
 <h1>Project Prerequisites and Dependencies</h1>
 
 <p>Before setting up the project, ensure you have the following software and dependencies installed:</p>
