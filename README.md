@@ -19,7 +19,7 @@ This guide walks you through the process of downloading and setting up the proje
 
 This guide walks you through the process of downloading and setting up the project in Android Studio, assuming Flutter and Dart are already installed.
 
-##Download to Android Studio
+## Download To Android Studio
 
 <table>
 
