@@ -7,67 +7,37 @@
 </p>
 
 ## Getting Started
+  <tr>
+    <td>
 
-    <style>
-        .container {
-            display: flex;
-            align-items: flex-start;
-        }
+This guide walks you through the process of downloading and setting up the project in Android Studio, assuming Flutter and Dart are already installed.
 
-        .image-container {
-            flex: 1;
-            text-align: right;
-        }
+## Steps
 
-        .image-container img {
-            max-width: 100%;
-            height: auto;
-        }
+### 1. Clone the Repository
+Open Android Studio and follow these steps:
+- Navigate to `File > New > Project from Version Control`.
+- In the URL field, enter `https://github.com/nwc6624/ENMU_CS_458_Semester_Project.git`.
+- Select the directory to clone into and click `Clone`.
 
-        .text-container {
-            flex: 2;
-        }
-    </style>
-</head>
-<body>
+### 2. Open the Cloned Project
+If the project isn't automatically opened:
+- Go to `File > Open`.
+- Select the cloned project directory.
 
-<div class="container">
-    <div class="text-container">
-        <h1>Project Setup Instructions</h1>
+### 3. Install Flutter and Dart Plugins
+If not already installed:
+- Go to `File > Settings > Plugins`.
+- Search and install `Flutter`. This should also install `Dart`.
+- Restart Android Studio.
 
-        <p>This guide walks you through the process of downloading and setting up the project in Android Studio, assuming Flutter and Dart are already installed.</p>
+    </td>
+    <td>
 
-        <h2>Steps</h2>
+![Screenshot_20231211-183934](https://github.com/nwc6624/ENMU_CS_458_Semester_Project/assets/6959463/81801da1-433f-4f31-89f8-20cabe724c6a)
 
-        <h3>1. Clone the Repository</h3>
-        <p>Open Android Studio and follow these steps:</p>
-        <ul>
-            <li>Navigate to <code>File &gt; New &gt; Project from Version Control</code>.</li>
-            <li>In the URL field, enter <code>https://github.com/nwc6624/ENMU_CS_458_Semester_Project.git</code>.</li>
-            <li>Select the directory to clone into and click <code>Clone</code>.</li>
-        </ul>
-
-        <h3>2. Open the Cloned Project</h3>
-        <p>If the project isn't automatically opened:</p>
-        <ul>
-            <li>Go to <code>File &gt; Open</code>.</li>
-            <li>Select the cloned project directory.</li>
-        </ul>
-
-        <h3>3. Install Flutter and Dart Plugins</h3>
-        <p>If not already installed:</p>
-        <ul>
-            <li>Go to <code>File &gt; Settings &gt; Plugins</code>.</li>
-            <li>Search and install <code>Flutter</code>. This should also install <code>Dart</code>.</li>
-            <li>Restart Android Studio.</li>
-        </ul>
-    </div>
-
-    <div class="image-container">
-        <img src="https://github.com/nwc6624/ENMU_CS_458_Semester_Project/assets/6959463/81801da1-433f-4f31-89f8-20cabe724c6a" alt="Screenshot_20231211-183934">
-    </div>
-</div>
-
+    </td>
+  </tr>
 <h3>4. Get Dependencies</h3>
 <p>Within Android Studio's terminal:</p>
 <ul>
