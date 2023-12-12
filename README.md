@@ -20,7 +20,11 @@ This guide walks you through the process of downloading and setting up the proje
 This guide walks you through the process of downloading and setting up the project in Android Studio, assuming Flutter and Dart are already installed.
 
 ## Steps
+ <td>
 
+<img src="https://github.com/nwc6624/ENMU_CS_458_Semester_Project/assets/6959463/81801da1-433f-4f31-89f8-20cabe724c6a" alt="Screenshot_20231211-183934" width="270" height="600">
+
+    </td>
 ### 1. Clone the Repository
 Open Android Studio and follow these steps:
 - Navigate to `File > New > Project from Version Control`.
@@ -39,11 +43,7 @@ If not already installed:
 - Restart Android Studio.
 
     </td>
-    <td>
-
-<img src="https://github.com/nwc6624/ENMU_CS_458_Semester_Project/assets/6959463/81801da1-433f-4f31-89f8-20cabe724c6a" alt="Screenshot_20231211-183934" width="270" height="600">
-
-    </td>
+   
   </tr>
 <h3>4. Get Dependencies</h3>
 <p>Within Android Studio's terminal:</p>
