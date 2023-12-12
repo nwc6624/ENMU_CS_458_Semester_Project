@@ -22,13 +22,7 @@ This guide walks you through the process of downloading and setting up the proje
 ## Steps
 
 <table>
-<tr>
-    <td>
-        <img src="https://github.com/nwc6624/ENMU_CS_458_Semester_Project/assets/6959463/81801da1-433f-4f31-89f8-20cabe724c6a" alt="Screenshot_20231211-183934" width="200" height="400">
-        <img src="https://github.com/nwc6624/ENMU_CS_458_Semester_Project/assets/6959463/311ed258-dd62-4b06-93eb-2458554947e7" alt="Screenshot_20231211-191049" width="200" height="400">
-        <img src="https://github.com/nwc6624/ENMU_CS_458_Semester_Project/assets/6959463/5fbed7f8-b084-4e41-9312-171463d3604d" alt="Screenshot_20231211-191106" width="200" height="400">
-    </td>
-</tr>
+
 
 
 
@@ -66,7 +60,13 @@ This guide walks you through the process of downloading and setting up the proje
     <li>Select a device or emulator.</li>
     <li>Click the 'Run' icon.</li>
 </ul>
-
+<tr>
+    <td>
+        <img src="https://github.com/nwc6624/ENMU_CS_458_Semester_Project/assets/6959463/81801da1-433f-4f31-89f8-20cabe724c6a" alt="Screenshot_20231211-183934" width="200" height="400">
+        <img src="https://github.com/nwc6624/ENMU_CS_458_Semester_Project/assets/6959463/311ed258-dd62-4b06-93eb-2458554947e7" alt="Screenshot_20231211-191049" width="200" height="400">
+        <img src="https://github.com/nwc6624/ENMU_CS_458_Semester_Project/assets/6959463/5fbed7f8-b084-4e41-9312-171463d3604d" alt="Screenshot_20231211-191106" width="200" height="400">
+    </td>
+</tr>
 ### Prerequisites
 
 <h1>Project Prerequisites</h1>
