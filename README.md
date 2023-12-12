@@ -51,15 +51,39 @@
 
 ### Prerequisites
 
-<h1>Project Prerequisites and Dependencies</h1>
+<h1>Project Prerequisites</h1>
 
-<p>Before setting up the project, ensure you have the following software and dependencies installed:</p>
+<p>Before setting up the project, ensure you have the following software installed:</p>
 
 <h2>Required Software</h2>
-<!-- Software Installation Guide Here -->
+
+<ul>
+    <li><strong>Flutter:</strong> Used for mobile app development.</li>
+    <li><strong>Dart SDK:</strong> Programming language used by Flutter.</li>
+    <li><strong>Android Studio:</strong> IDE for Android development.</li>
+</ul>
+
+<h2>Installation Guide</h2>
+
+<h3>Installing Flutter</h3>
+<ul>
+    <li>Download Flutter SDK from <a href="https://flutter.dev/docs/get-started/install">Flutter's official website</a>.</li>
+    <li>Extract the SDK to a preferred location on your system.</li>
+    <li>Add Flutter to your system's PATH.</li>
+    <li>Run <code>flutter doctor</code> in a terminal to check for any additional dependencies.</li>
+</ul>
+
+<h3>Installing Android Studio</h3>
+<ul>
+    <li>Download Android Studio from <a href="https://developer.android.com/studio">Android's official website</a>.</li>
+    <li>Run the installer and follow the setup wizard.</li>
+    <li>Open Android Studio, go to <code>File &gt; Settings &gt; Plugins</code>.</li>
+    <li>Search for the Flutter plugin and install it (this should automatically install Dart).</li>
+</ul>
+
 
 <h2>Flutter Dependencies</h2>
-<p>Add the following dependencies to your <code>pubspec.yaml</code> file:</p>
+<p>Add the following (Android) dependencies to your <code>pubspec.yaml</code> file:</p>
 
 <pre>
 dependencies:
