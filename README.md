@@ -34,7 +34,7 @@ If not already installed:
     </td>
     <td>
 
-![Screenshot_20231211-183934](https://github.com/nwc6624/ENMU_CS_458_Semester_Project/assets/6959463/81801da1-433f-4f31-89f8-20cabe724c6a)
+<img src="https://github.com/nwc6624/ENMU_CS_458_Semester_Project/assets/6959463/81801da1-433f-4f31-89f8-20cabe724c6a" alt="Screenshot_20231211-183934" width="540" height="1200">
 
     </td>
   </tr>
