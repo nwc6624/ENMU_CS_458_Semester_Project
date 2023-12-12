@@ -26,6 +26,8 @@ This guide walks you through the process of downloading and setting up the proje
     <td>
 
 <img src="https://github.com/nwc6624/ENMU_CS_458_Semester_Project/assets/6959463/81801da1-433f-4f31-89f8-20cabe724c6a" alt="Screenshot_20231211-183934" width="270" height="600">
+![Screenshot_20231211-191049](https://github.com/nwc6624/ENMU_CS_458_Semester_Project/assets/6959463/311ed258-dd62-4b06-93eb-2458554947e7)
+![Screenshot_20231211-191106](https://github.com/nwc6624/ENMU_CS_458_Semester_Project/assets/6959463/5fbed7f8-b084-4e41-9312-171463d3604d)
 
     </td>
     <td>
@@ -170,7 +172,7 @@ Give an example
 
 ## Deployment
 
-<h2>Running the App on a Device</h2>
+<h2>Running the App on an Android Device</h2>
 
 <ol>
     <li><strong>Enable Developer Options and USB Debugging:</strong>
