@@ -3,7 +3,6 @@
 <p align="justify">
      <img align="right" src="https://github.com/nwc6624/ENMU_CS_458_Semester_Project/assets/6959463/dbf6bc5c-e256-4b77-9840-1f48ecce088f" alt="Screenshot_20231211-182235">
     In our CS 458, Android Development course, we embraced the challenge of addressing a pressing issue faced by students at Eastern New Mexico University. Despite a vibrant student body of over 4,000, the university lacked a dedicated campus-specific application to cater to student needs. Drawing from our own experiences as students, we had a clear vision of the ideal functionalities and features
-   
     of such an application. To bring this vision to life, we utilized Flutter, a cutting-edge UI software development kit, ensuring seamless cross-compatibility across both Android and IOS platforms. This project not only enhanced our technical skills but also will contribute significantly to the student community at ENMU.
 </p>
 
