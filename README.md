@@ -60,37 +60,40 @@ This guide walks you through the process of downloading and setting up the proje
     <li>Select a device or emulator.</li>
     <li>Click the 'Run' icon.</li>
 </ul>
-       <td>
-            <img src="https://github.com/nwc6624/ENMU_CS_458_Semester_Project/assets/6959463/49e01402-3cc6-40a5-95e1-2557bddf6bda" alt="Screenshot_20231211-192417" width="250" height="500">
-        </td>
-        <td>
-            <img src="https://github.com/nwc6624/ENMU_CS_458_Semester_Project/assets/6959463/81801da1-433f-4f31-89f8-20cabe724c6a" alt="Screenshot_20231211-183934" width="250" height="500">
-        </td>
-        <td>
-            <img src="https://github.com/nwc6624/ENMU_CS_458_Semester_Project/assets/6959463/311ed258-dd62-4b06-93eb-2458554947e7" alt="Screenshot_20231211-191049" width="250" height="500">
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <img src="https://github.com/nwc6624/ENMU_CS_458_Semester_Project/assets/6959463/5fbed7f8-b084-4e41-9312-171463d3604d" alt="Screenshot_20231211-191106" width="250" height="500">
-        </td>
-        <td>
-            <img src="https://github.com/nwc6624/ENMU_CS_458_Semester_Project/assets/6959463/063d8468-3d29-49b3-af4b-dd2058bfad0b" alt="Screenshot_20231211-192506" width="250" height="500">
-        </td>
-        <td>
-            <img src="https://github.com/nwc6624/ENMU_CS_458_Semester_Project/assets/6959463/aca3ac9b-6a5e-4b25-a3ca-44befb5af514" alt="Screenshot_20231211-192608" width="250" height="500">
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <img src="https://github.com/nwc6624/ENMU_CS_458_Semester_Project/assets/6959463/f01d42d4-eee7-4d26-b09f-57356b8f266b" alt="Screenshot_20231211-192553" width="250" height="500">
-        </td>
-    <tr>
-    ![Screenshot_20231211-193317](https://github.com/nwc6624/ENMU_CS_458_Semester_Project/assets/6959463/951fa186-13ed-4771-a4e3-f85f9f0e7073)
-
-![Screenshot_20231211-192659](https://github.com/nwc6624/ENMU_CS_458_Semester_Project/assets/6959463/dfed1910-15a2-4670-ad6d-5df73272324d)
-
+<tr>
+    <td>
+        <img src="https://github.com/nwc6624/ENMU_CS_458_Semester_Project/assets/6959463/49e01402-3cc6-40a5-95e1-2557bddf6bda" alt="Screenshot_20231211-192417" width="250" height="500">
+    </td>
+    <td>
+        <img src="https://github.com/nwc6624/ENMU_CS_458_Semester_Project/assets/6959463/81801da1-433f-4f31-89f8-20cabe724c6a" alt="Screenshot_20231211-183934" width="250" height="500">
+    </td>
+    <td>
+        <img src="https://github.com/nwc6624/ENMU_CS_458_Semester_Project/assets/6959463/311ed258-dd62-4b06-93eb-2458554947e7" alt="Screenshot_20231211-191049" width="250" height="500">
+    </td>
 </tr>
+<tr>
+    <td>
+        <img src="https://github.com/nwc6624/ENMU_CS_458_Semester_Project/assets/6959463/5fbed7f8-b084-4e41-9312-171463d3604d" alt="Screenshot_20231211-191106" width="250" height="500">
+    </td>
+    <td>
+        <img src="https://github.com/nwc6624/ENMU_CS_458_Semester_Project/assets/6959463/063d8468-3d29-49b3-af4b-dd2058bfad0b" alt="Screenshot_20231211-192506" width="250" height="500">
+    </td>
+    <td>
+        <img src="https://github.com/nwc6624/ENMU_CS_458_Semester_Project/assets/6959463/aca3ac9b-6a5e-4b25-a3ca-44befb5af514" alt="Screenshot_20231211-192608" width="250" height="500">
+    </td>
+</tr>
+<tr>
+    <td>
+        <img src="https://github.com/nwc6624/ENMU_CS_458_Semester_Project/assets/6959463/f01d42d4-eee7-4d26-b09f-57356b8f266b" alt="Screenshot_20231211-192553" width="250" height="500">
+    </td>
+    <td>
+        <img src="https://github.com/nwc6624/ENMU_CS_458_Semester_Project/assets/6959463/951fa186-13ed-4771-a4e3-f85f9f0e7073" alt="Screenshot_20231211-193317" width="250" height="500">
+    </td>
+    <td>
+        <img src="https://github.com/nwc6624/ENMU_CS_458_Semester_Project/assets/6959463/dfed1910-15a2-4670-ad6d-5df73272324d" alt="Screenshot_20231211-192659" width="250" height="500">
+    </td>
+</tr>
+
 
 ### Prerequisites
 
