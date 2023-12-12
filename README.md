@@ -86,6 +86,9 @@ This guide walks you through the process of downloading and setting up the proje
             <img src="https://github.com/nwc6624/ENMU_CS_458_Semester_Project/assets/6959463/f01d42d4-eee7-4d26-b09f-57356b8f266b" alt="Screenshot_20231211-192553" width="250" height="500">
         </td>
     <tr>
+    ![Screenshot_20231211-193317](https://github.com/nwc6624/ENMU_CS_458_Semester_Project/assets/6959463/951fa186-13ed-4771-a4e3-f85f9f0e7073)
+
+![Screenshot_20231211-192659](https://github.com/nwc6624/ENMU_CS_458_Semester_Project/assets/6959463/dfed1910-15a2-4670-ad6d-5df73272324d)
 
 </tr>
 
