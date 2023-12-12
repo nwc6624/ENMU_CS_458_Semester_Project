@@ -116,22 +116,20 @@ flutter:
 <!-- Additional Setup Instructions Here -->
 
 </body>
-### Installing
+<h2>Installing</h2>
 
-After adding (Or verifying) the dependencies, save the pubspec.yaml file.
-Android Studio will prompt you to get packages. You can click on Get dependencies in the bar that appears at the top of the editor.
-Alternatively, you can open the terminal within Android Studio (usually located at the bottom of the IDE) and run the command:
+<p>After adding (Or verifying) the dependencies, save the <code>pubspec.yaml</code> file.</p>
+<p>Android Studio will prompt you to get packages. You can click on <strong>Get dependencies</strong> in the bar that appears at the top of the editor.</p>
+<p>Alternatively, you can open the terminal within Android Studio (usually located at the bottom of the IDE) and run the command:</p>
 
-flutter pub get
+<pre><code>flutter pub get</code></pre>
 
-End with an example of getting some data out of the system or using it for a little demo
-Verify Installation:
+<h3>Verify Installation:</h3>
+<p>Once the dependencies are fetched, you should see a message in the terminal indicating that the process is complete.</p>
+<p>Your project is now ready to use these dependencies.</p>
 
-Once the dependencies are fetched, you should see a message in the terminal indicating that the process is complete.
-Your project is now ready to use these dependencies.
-Sync Your Project:
-
-If needed, click on Sync Now in the bar that appears at the top of the IDE to ensure everything is up to date.
+<h3>Sync Your Project:</h3>
+<p>If needed, click on <strong>Sync Now</strong> in the bar that appears at the top of the IDE to ensure everything is up to date.</p>
 
 ## Running the tests
 
