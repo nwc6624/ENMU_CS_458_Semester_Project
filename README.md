@@ -47,9 +47,7 @@ If not already installed:
 - Search and install `Flutter`. This should also install `Dart`.
 - Restart Android Studio.
 
-
     </td>
-   
   </tr>
 <h3>4. Get Dependencies</h3>
 <p>Within Android Studio's terminal:</p>
