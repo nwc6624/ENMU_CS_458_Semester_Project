@@ -119,7 +119,7 @@ class _CampusMapScreenState extends State<CampusMapScreen> with SingleTickerProv
 
   Widget _mapView() {
     return _isLoading
-        ? Center(child: CircularProgressIndicator())
+        ? const Center(child: CircularProgressIndicator())
         : FlutterMap(
       options: const MapOptions(
         initialCenter: LatLng(34.186192, -103.334398),

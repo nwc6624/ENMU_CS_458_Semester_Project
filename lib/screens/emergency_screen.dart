@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:url_launcher/url_launcher.dart';
+// import 'package:url_launcher/url_launcher.dart';
 import 'package:enmu_mobile/screens/show_map_image.dart';
+import 'package:enmu_mobile/models/url_launcher_class.dart';
 
 class EmergencyScreen extends StatefulWidget {
   const EmergencyScreen({super.key});
@@ -11,6 +12,7 @@ class EmergencyScreen extends StatefulWidget {
 }
 
 class _EmergencyScreenState extends State<EmergencyScreen> {
+
   Widget showPDF(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -22,14 +24,16 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
     );
   }
 
-  void _makePhoneCall(String phoneNumber) async {
-    final Uri phoneCall = Uri(scheme: 'tel', path: phoneNumber);
-    if (await canLaunchUrl(phoneCall)) {
-      await launchUrl(phoneCall);
-    } else {
-      throw 'Could not call $phoneCall';
-    }
-  }
+  final urlLauncher = UrlLauncher();
+
+  // void _makePhoneCall(String phoneNumber) async {
+  //   final Uri phoneCall = Uri(scheme: 'tel', path: phoneNumber);
+  //   if (await canLaunchUrl(phoneCall)) {
+  //     await launchUrl(phoneCall);
+  //   } else {
+  //     throw 'Could not call $phoneCall';
+  //   }
+  // }
 
   Widget _portrait() {
     double screenHeight = MediaQuery.of(context).size.height -
@@ -53,7 +57,7 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                         children: [
                           const Text('Non-Emergency Police Issues:'),
                           ElevatedButton(
-                            onPressed: () => _makePhoneCall('5755622392'),
+                            onPressed: () => urlLauncher.makePhoneCall('5755622392'), //_makePhoneCall('5755622392'),
                             child: const Text(
                               'Call (575) 562-2392',
                             ),
@@ -65,7 +69,7 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                         children: [
                           const Text('After Hours/Weekends/ Holidays:'),
                           ElevatedButton(
-                            onPressed: () => _makePhoneCall('5757602945'),
+                            onPressed: () => urlLauncher.makePhoneCall('5757602945'), //_makePhoneCall('5757602945'),
                             child: const Text(
                               'Call (575) 760-2945',
                             ),
@@ -144,7 +148,7 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                         children: [
                           const Text('Non-Emergency Police Issues:'),
                           ElevatedButton(
-                            onPressed: () => _makePhoneCall('5755622392'),
+                            onPressed: () => urlLauncher.makePhoneCall('5755622392'), //_makePhoneCall('5755622392'),
                             child: const Text(
                               'Call (575) 562-2392',
                             ),
@@ -157,7 +161,7 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                         children: [
                           const Text('After Hours/Weekends/ Holidays:'),
                           ElevatedButton(
-                            onPressed: () => _makePhoneCall('5757602945'),
+                            onPressed: () => urlLauncher.makePhoneCall('5757602945'), //_makePhoneCall('5757602945'),
                             child: const Text(
                               'Call (575) 760-2945',
                             ),
@@ -276,7 +280,7 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                 children: [
                   const Text('Non-Emergency Police Issues:'),
                   ElevatedButton(
-                    onPressed: () => _makePhoneCall('5755622392'),
+                    onPressed: () => urlLauncher.makePhoneCall('5755622392'), //_makePhoneCall('5755622392'),
                     child: const Text(
                       'Call (575) 562-2392',
                     ),
@@ -288,7 +292,7 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                 children: [
                   const Text('After Hours/Weekends/ Holidays:'),
                   ElevatedButton(
-                    onPressed: () => _makePhoneCall('5757602945'),
+                    onPressed: () => urlLauncher.makePhoneCall('5757602945'), //_makePhoneCall('5757602945'),
                     child: const Text(
                       'Call (575) 760-2945',
                     ),

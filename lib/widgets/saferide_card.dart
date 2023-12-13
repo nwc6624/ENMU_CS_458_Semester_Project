@@ -22,7 +22,7 @@ class SafeRideCard extends StatelessWidget {
         onTap: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => const SafeRide(),
+              builder: (context) => SafeRide(),
             ),
           );
         },

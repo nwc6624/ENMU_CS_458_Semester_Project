@@ -165,7 +165,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
             const SizedBox(height: 4),
-            const EmergencyCard(
+             const EmergencyCard(
               title: 'ENMU Police',
               icon: Icon(Icons.local_police),
             ),

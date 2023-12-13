@@ -1,27 +1,32 @@
 import 'package:flutter/material.dart';
 
-import 'package:url_launcher/url_launcher.dart';
+// import 'package:url_launcher/url_launcher.dart';
+
+import '../models/url_launcher_class.dart';
 
 class SafeRide extends StatelessWidget {
-  const SafeRide({super.key});
+   SafeRide({super.key});
 
-  void _makePhoneCall(String phoneNumber) async {
-    final Uri phoneCall = Uri(scheme: 'tel', path: phoneNumber);
-    if (await canLaunchUrl(phoneCall)) {
-      await launchUrl(phoneCall);
-    } else {
-      throw 'Could not call $phoneCall';
-    }
-  }
+  final urlLauncher = UrlLauncher();
 
-  Future<void> _launchInBrowser(Uri url) async {
-    if (!await launchUrl(
-      url,
-      mode: LaunchMode.externalApplication,
-    )) {
-      throw Exception('Could not launch $url');
-    }
-  }
+
+  // void _makePhoneCall(String phoneNumber) async {
+  //   final Uri phoneCall = Uri(scheme: 'tel', path: phoneNumber);
+  //   if (await canLaunchUrl(phoneCall)) {
+  //     await launchUrl(phoneCall);
+  //   } else {
+  //     throw 'Could not call $phoneCall';
+  //   }
+  // }
+
+  // Future<void> _launchInBrowser(Uri url) async {
+  //   if (!await launchUrl(
+  //     url,
+  //     mode: LaunchMode.externalApplication,
+  //   )) {
+  //     throw Exception('Could not launch $url');
+  //   }
+  // }
 
   Widget _landscape(double screenWidth) {
     return Column(
@@ -38,7 +43,7 @@ class SafeRide extends StatelessWidget {
               child: Column(
                 children: [
                   TextButton(
-                    onPressed: () => _makePhoneCall('5756079995'),
+                    onPressed: () => urlLauncher.makePhoneCall('5756079995'), //_makePhoneCall('5756079995'),
                     child: Text(
                       '575.607.9995',
                       style: TextStyle(
@@ -48,7 +53,7 @@ class SafeRide extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   TextButton(
-                    onPressed: () => _makePhoneCall('5756075999'),
+                    onPressed: () => urlLauncher.makePhoneCall('5756075999'), //_makePhoneCall('5756075999'),
                     child: Text(
                       '575.607.5999',
                       style: TextStyle(
@@ -86,7 +91,7 @@ class SafeRide extends StatelessWidget {
             ? Column(
                 children: [
                   TextButton(
-                    onPressed: () => _makePhoneCall('5756079995'),
+                    onPressed: () => urlLauncher.makePhoneCall('5756079995'), //_makePhoneCall('5756079995'),
                     child: Text(
                       '575.607.9995',
                       style: TextStyle(
@@ -95,7 +100,7 @@ class SafeRide extends StatelessWidget {
                     ),
                   ),
                   TextButton(
-                    onPressed: () => _makePhoneCall('5756075999'),
+                    onPressed: () => urlLauncher.makePhoneCall('5756075999'), //_makePhoneCall('5756075999'),
                     child: Text(
                       '575.607.5999',
                       style: TextStyle(
@@ -109,7 +114,7 @@ class SafeRide extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   TextButton(
-                    onPressed: () => _makePhoneCall('5756079995'),
+                    onPressed: () => urlLauncher.makePhoneCall('5756079995'), //_makePhoneCall('5756079995'),
                     child: Text(
                       '575.607.9995',
                       style: TextStyle(
@@ -118,7 +123,7 @@ class SafeRide extends StatelessWidget {
                     ),
                   ),
                   TextButton(
-                    onPressed: () => _makePhoneCall('5756075999'),
+                    onPressed: () => urlLauncher.makePhoneCall('5756075999'), //_makePhoneCall('5756075999'),
                     child: Text(
                       '575.607.5999',
                       style: TextStyle(
@@ -154,7 +159,7 @@ class SafeRide extends StatelessWidget {
       appBar: AppBar(
         actions: [
           IconButton(
-            onPressed: () => _launchInBrowser(toLaunch),
+            onPressed: () => urlLauncher.launchInBrowser(toLaunch), //_launchInBrowser(toLaunch),
             icon: const Icon(Icons.facebook),
           )
         ],

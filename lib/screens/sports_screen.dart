@@ -1,6 +1,7 @@
+import 'package:enmu_mobile/models/connectivity_plus_class.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
+// import 'package:connectivity_plus/connectivity_plus.dart';
 
 class SportsScreen extends StatefulWidget {
   const SportsScreen({Key? key}) : super(key: key);
@@ -12,13 +13,15 @@ class SportsScreen extends StatefulWidget {
 class _SportsScreenState extends State<SportsScreen> with SingleTickerProviderStateMixin {
   late Key _key;
   late WebViewController _webViewController;
-  bool _isConnected = true;
-  bool _isLoading = true;
+  // bool _isConnected = true;
+  // bool _isLoading = true;
   bool _isLoadingPage = false;
   static const String baseUrl = 'https://goeasternathletics.com/index.aspx';
 
   late AnimationController _animationController;
   late Animation<double> _animation;
+
+  ConnectivityPlus connectivity = ConnectivityPlus();
 
   @override
   void initState() {
@@ -31,7 +34,11 @@ class _SportsScreenState extends State<SportsScreen> with SingleTickerProviderSt
     _animation = Tween(begin: 0.0, end: 1.0).animate(_animationController);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _checkInternetConnectivity();
+      connectivity.checkInternetConnectivity();
+      if(!connectivity.isConnected) {
+        _showNoInternetDialog();
+      }
+      // _checkInternetConnectivity();
     });
   }
 
@@ -41,15 +48,15 @@ class _SportsScreenState extends State<SportsScreen> with SingleTickerProviderSt
     super.dispose();
   }
 
-  Future<void> _checkInternetConnectivity() async {
-    var connectivityResult = await Connectivity().checkConnectivity();
-    if (connectivityResult == ConnectivityResult.none) {
-      setState(() {
-        _isConnected = false;
-      });
-      _showNoInternetDialog();
-    }
-  }
+  // Future<void> _checkInternetConnectivity() async {
+  //   var connectivityResult = await Connectivity().checkConnectivity();
+  //   if (connectivityResult == ConnectivityResult.none) {
+  //     setState(() {
+  //       _isConnected = false;
+  //     });
+  //     _showNoInternetDialog();
+  //   }
+  // }
 
   void _showNoInternetDialog() {
     if (!mounted) return;
@@ -105,7 +112,7 @@ class _SportsScreenState extends State<SportsScreen> with SingleTickerProviderSt
           ],
         ),
         body: SafeArea(
-          child: _isConnected
+          child: connectivity.isConnected
               ? Stack(
             children: [
               WebView(
@@ -128,7 +135,7 @@ class _SportsScreenState extends State<SportsScreen> with SingleTickerProviderSt
                 onWebResourceError: (error) {
                   setState(() {
                     _isLoadingPage = false;
-                    _isLoading = false;
+                    // _isLoading = false;
                   });
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(

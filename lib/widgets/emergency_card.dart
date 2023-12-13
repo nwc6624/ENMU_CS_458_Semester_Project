@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:url_launcher/url_launcher.dart';
-
+// import 'package:url_launcher/url_launcher.dart';
+import 'package:enmu_mobile/models/url_launcher_class.dart';
 import '../screens/emergency_screen.dart';
 
 class EmergencyCard extends StatelessWidget {
@@ -14,16 +14,17 @@ class EmergencyCard extends StatelessWidget {
   final String title;
   final Icon icon;
 
-  void _makePhoneCall(String phoneNumber) async {
-    final Uri phoneCall = Uri(scheme: 'tel', path: phoneNumber);
-    if (await canLaunchUrl(phoneCall)) {
-      await launchUrl(phoneCall);
-    } else {
-      throw 'Could not call $phoneCall';
-    }
-  }
+  // void _makePhoneCall(String phoneNumber) async {
+  //   final Uri phoneCall = Uri(scheme: 'tel', path: phoneNumber);
+  //   if (await canLaunchUrl(phoneCall)) {
+  //     await launchUrl(phoneCall);
+  //   } else {
+  //     throw 'Could not call $phoneCall';
+  //   }
+  // }
 
-  Future<void> _showCampusPoliceAlert(BuildContext context) async {
+  Future<void> _showCampusPoliceAlert(
+      BuildContext context, UrlLauncher urlLauncher) async {
     showDialog<String>(
       context: context,
       builder: (BuildContext dialogContext) {
@@ -41,9 +42,7 @@ class EmergencyCard extends StatelessWidget {
                     Theme.of(context).colorScheme.secondaryContainer,
               ),
               child: const Text('Call'),
-              onPressed: () {
-                _makePhoneCall('5755622392'); // Call ENMU campus police
-              },
+              onPressed: () => urlLauncher.makePhoneCall('5755622392'),
             ),
             TextButton(
               child: const Text('Cancel'),
@@ -59,6 +58,8 @@ class EmergencyCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final UrlLauncher urlLauncher = UrlLauncher();
+
     return Card(
       elevation: 3,
       child: ListTile(
@@ -79,7 +80,7 @@ class EmergencyCard extends StatelessWidget {
           highlightColor: Colors.lightBlue,
           icon: icon,
           color: Colors.red,
-          onPressed: () => _showCampusPoliceAlert(context),
+          onPressed: () => _showCampusPoliceAlert(context, urlLauncher),
           tooltip: "Call Campus Police",
           iconSize: 35,
         ),
