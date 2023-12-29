@@ -135,6 +135,7 @@ This guide walks you through the process of downloading and setting up the proje
 dependencies:
   flutter:
     sdk: flutter
+  connectivity: ^3.0.6   
   latlong2: ^0.9.0      # Upgraded to ^0.9.0 to resolve the version conflict
   url_launcher: ^6.2.1
   cupertino_icons: ^1.0.2
