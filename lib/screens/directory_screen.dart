@@ -11,34 +11,66 @@ class DirectoryScreen extends StatefulWidget {
 
 class _DirectoryScreenState extends State<DirectoryScreen> {
   String searchQuery = '';
-  late Future<List<Map<String, String>>> directoriesFuture;
+  Future<List<Map<String, String>>>? directoriesFuture;
   final TextEditingController _searchController = TextEditingController();
+  final FocusNode _searchFocusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
-    directoriesFuture = scrapeEnmuDirectories();
+    directoriesFuture = _fetchDirectories();
   }
 
-  void updateSearchQuery(String newQuery) {
+  Future<List<Map<String, String>>> _fetchDirectories() async {
+    try {
+      return await scrapeEnmuDirectories();
+    } catch (e) {
+      return [];
+    }
+  }
+
+  Future<void> _performSearch() async {
+    final query = _searchController.text.toLowerCase();
+
     setState(() {
-      searchQuery = newQuery.toLowerCase();
-      directoriesFuture =
-          scrapeEnmuDirectories().then((list) => list.where((directory) {
-                final titleLower = directory['title']?.toLowerCase() ?? '';
-                return titleLower.contains(searchQuery);
-              }).toList());
+      searchQuery = query;
+      directoriesFuture = _fetchDirectories().then((list) {
+        if (query.isNotEmpty) {
+          return list.where((directory) {
+            final titleLower = directory['title']?.toLowerCase() ?? '';
+            return titleLower.contains(searchQuery);
+          }).toList();
+        } else {
+          return list;
+        }
+      });
     });
-  }
 
-  void resetSearch() {
+    // Unfocus the keyboard after performing the search
     FocusScope.of(context).unfocus();
-    _searchController.clear();
+  }
 
+  Future<void> _reloadDirectory() async {
     setState(() {
-      searchQuery = '';
-      directoriesFuture = scrapeEnmuDirectories();
+      _searchController.clear();
+      searchQuery = ''; // Clear the search query
+      directoriesFuture = _fetchDirectories().then((list) {
+        if (searchQuery.isNotEmpty) {
+          return list.where((directory) {
+            final titleLower = directory['title']?.toLowerCase() ?? '';
+            return titleLower.contains(searchQuery);
+          }).toList();
+        } else {
+          return list;
+        }
+      });
     });
+  }
+
+  @override
+  void dispose() {
+    _searchFocusNode.dispose();
+    super.dispose();
   }
 
   @override
@@ -46,76 +78,115 @@ class _DirectoryScreenState extends State<DirectoryScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('ENMU Directory'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.refresh),
-            onPressed: resetSearch,
-          ),
-        ],
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(kToolbarHeight),
-          child: Padding(
-            padding: const EdgeInsets.all(8),
-            child: TextField(
-              controller: _searchController,
-              onChanged: updateSearchQuery,
-              style: const TextStyle(color: Colors.white),
-              decoration: InputDecoration(
-                hintText: 'Search...',
-                hintStyle: TextStyle(color: Colors.white.withOpacity(0.7)),
-                border: const OutlineInputBorder(),
-                prefixIcon: const Icon(Icons.search, color: Colors.white),
-                fillColor: Colors.white24,
-                filled: true,
+      ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: SearchBar(
+                searchController: _searchController,
+                onSearch: _performSearch,
+                focusNode: _searchFocusNode,
               ),
+            ),
+            Expanded(
+              child: FutureBuilder<List<Map<String, String>>>(
+                future: directoriesFuture,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasError || snapshot.data == null) {
+                    return Column(
+                      children: [
+                        Text('Error: ${snapshot.error}'),
+                        ElevatedButton(
+                          onPressed: _reloadDirectory,
+                          child: Text('Reload'),
+                        ),
+                      ],
+                    );
+                  } else if (snapshot.data!.isEmpty) {
+                    return Column(
+                      children: [
+                        Text('No directories found.'),
+                        ElevatedButton(
+                          onPressed: _reloadDirectory,
+                          child: Text('Reload'),
+                        ),
+                      ],
+                    );
+                  } else {
+                    final directories = snapshot.data!;
+                    return ListView.builder(
+                      itemCount: directories.length,
+                      itemBuilder: (context, index) {
+                        final directory = directories[index];
+                        return ListTile(
+                          title: Text(directory['title'] ?? 'No title'),
+                          subtitle: const Text('Read more'),
+                          onTap: () {
+                            final url = directory['url'];
+                            if (url != null) {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => WebViewScreen(url: url),
+                                ),
+                              );
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(content: Text('URL not available')),
+                              );
+                            }
+                          },
+                        );
+                      },
+                    );
+                  }
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class SearchBar extends StatelessWidget {
+  final TextEditingController searchController;
+  final VoidCallback onSearch;
+  final FocusNode? focusNode;
+
+  const SearchBar({
+    Key? key,
+    required this.searchController,
+    required this.onSearch,
+    this.focusNode,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: TextField(
+            controller: searchController,
+            onChanged: (_) {},
+            onSubmitted: (_) => onSearch(),
+            focusNode: focusNode,
+            style: const TextStyle(color: Colors.black),
+            decoration: InputDecoration(
+              hintText: 'Search...',
+              border: const OutlineInputBorder(),
             ),
           ),
         ),
-      ),
-      body: SafeArea(
-        child: FutureBuilder<List<Map<String, String>>>(
-          future: directoriesFuture,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            } else if (snapshot.hasError) {
-              return Center(child: Text('Error: ${snapshot.error}'));
-            } else if (snapshot.hasData) {
-              final directories = snapshot.data!;
-              if (directories.isEmpty) {
-                return const Center(child: Text('No directories found.'));
-              } else {
-                return ListView.builder(
-                  itemCount: directories.length,
-                  itemBuilder: (context, index) {
-                    final directory = directories[index];
-                    return ListTile(
-                      title: Text(directory['title'] ?? 'No title'),
-                      subtitle: const Text('Read more'),
-                      onTap: () {
-                        final url = directory['url'];
-                        if (url != null) {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => WebViewScreen(url: url),
-                            ),
-                          );
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('URL not available')),
-                          );
-                        }
-                      },
-                    );
-                  },
-                );
-              }
-            } else {
-              return const Center(child: Text('Something went wrong.'));
-            }
-          },
+        IconButton(
+          icon: const Icon(Icons.search),
+          onPressed: onSearch,
         ),
-      ),
+      ],
     );
   }
 }
