@@ -102,14 +102,17 @@ class _DirectoryScreenState extends State<DirectoryScreen> {
                         Text('Error: ${snapshot.error}'),
                         ElevatedButton(
                           onPressed: _reloadDirectory,
-
+                          child: Text('Reload'),
                         ),
                       ],
                     );
                   } else if (snapshot.data!.isEmpty) {
                     return Column(
                       children: [
-
+                        Text('No directories found.'),
+                        ElevatedButton(
+                          onPressed: _reloadDirectory,
+                          child: Text('Reload'),
                         ),
                       ],
                     );
@@ -173,7 +176,9 @@ class SearchBar extends StatelessWidget {
             onSubmitted: (_) => onSearch(),
             focusNode: focusNode,
             style: const TextStyle(color: Colors.black),
-
+            decoration: InputDecoration(
+              hintText: 'Search...',
+              border: const OutlineInputBorder(),
             ),
           ),
         ),
